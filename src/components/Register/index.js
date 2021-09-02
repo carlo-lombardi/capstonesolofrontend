@@ -64,8 +64,8 @@ export default function Register() {
         <Form>
           <h3 className="card-header">Register</h3>
           <div className="card-body">
-            <div className="form-row">
-              <div className="form-group col-6">
+            <div className="form-row fluid">
+              <div className="form-group col">
                 <label>First Name</label>
                 <Field
                   name="firstName"
@@ -81,7 +81,7 @@ export default function Register() {
                   className="invalid-feedback"
                 />
               </div>
-              <div className="form-group col-6">
+              <div className="form-group col">
                 <label>Last Name</label>
                 <Field
                   name="lastName"

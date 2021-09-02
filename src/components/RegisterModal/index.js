@@ -13,6 +13,7 @@ export default function RegisterOrSignIn(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      className="main_modal_login"
     >
       <Modal.Body>
         {displayer == true ? <LogIn /> : <Register />}

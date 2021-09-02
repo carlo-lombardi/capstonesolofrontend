@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import { Login } from "../../servicesFetch/accountServicesFetch";
 import ForgotPassword from "../ForgotPassword";
-
+import "./index.css";
 export default function LogIn() {
   const history = useHistory();
   const [displayer, setDisplayer] = useState(true);
@@ -47,15 +47,18 @@ export default function LogIn() {
         >
           {({ errors, touched, isSubmitting }) => (
             <Form>
-              <h3 className="card-header">Login</h3>
+              <h3 className="card-header-h3">LOG IN</h3>
+              <h6>
+                or choose <Link>fast track</Link>
+              </h6>
               <div className="card-body">
                 <div className="form-group">
-                  <label>Email</label>
+                  <label>Email address</label>
                   <Field
                     name="email"
                     type="text"
                     className={
-                      "form-control" +
+                      "form-control-email-box" +
                       (errors.email && touched.email ? " is-invalid" : "")
                     }
                   />
@@ -66,12 +69,12 @@ export default function LogIn() {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Password</label>
+                  <label>Insert Password</label>
                   <Field
                     name="password"
                     type="password"
                     className={
-                      "form-control" +
+                      "form-control-email-box" +
                       (errors.password && touched.password ? " is-invalid" : "")
                     }
                   />
@@ -82,7 +85,7 @@ export default function LogIn() {
                   />
                 </div>
                 <div className="form-row">
-                  <div className="form-group col">
+                  <div className="form-group-button col-12">
                     {responseMessage && <div>{responseMessage}</div>}
                     <button
                       type="submit"
@@ -95,7 +98,7 @@ export default function LogIn() {
                       Login
                     </button>
                   </div>
-                  <div className="form-group col text-right">
+                  <div className="form-group-forgot-password col-12 text-right">
                     <Link onClick={() => setDisplayer(false)}>
                       Forgot Password?
                     </Link>

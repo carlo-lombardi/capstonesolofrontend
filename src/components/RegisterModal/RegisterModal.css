@@ -20,3 +20,25 @@
   text-decoration: underline;
   font-size: small;
 }
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  outline: 0;
+}
+.main_modal_login .modal-dialog .modal-content {
+  height: 500px;
+}
+.modal-content .modal-body .card-body {
+  padding: 0;
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 340px;
+    margin: 1.75rem auto;
+  }
+}
