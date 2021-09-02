@@ -1,0 +1,43 @@
+.view-menu-button {
+  width: 100%;
+  display: block;
+}
+.about-us-text-semi-port {
+  margin-top: 7% !important;
+  border-width: 30px;
+  border-style: solid;
+  border-image: url(https://images.getbento.com/accounts/3c10e657dc5f2aa01b55394e8376688a/media/images/90223BORDER.png);
+  border-image-slice: 190;
+  padding-top: 10%;
+  right: 1%;
+  width: 100vh;
+  margin-top: 49px;
+  height: 60%;
+}
+.about-us-text-semi-port p {
+  font-size: 130%;
+  margin-top: 40px;
+}
+@media (max-width: 992px) {
+  .about-us-text-semi-port {
+    right: 1px;
+    text-align: center;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    margin-top: 0% !important;
+    border-width: 0px;
+    border-style: solid;
+    border-image: url(https://images.getbento.com/accounts/3c10e657dc5f2aa01b55394e8376688a/media/images/90223BORDER.png);
+    border-image-slice: 0;
+  }
+}
+.view-menu-button button {
+  left: 10px;
+  background-color: rgba(0, 17, 255, 0.124);
+  width: 25%;
+  border-radius: 5px;
+  box-shadow: 0px 3px rgba(0, 0, 0, 0.315);
+  border: none;
+  color: rgb(12, 16, 240);
+  margin-left: 0%;
+}
