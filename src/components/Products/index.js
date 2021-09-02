@@ -19,7 +19,7 @@ const Products = ({ heading, items }) => {
   let [titleLabel, setTitleLabel] = useState("");
   const [responseOrderLine, setResponseOrderLine] = useState();
 
-  async function Increasing(e) {
+  async function Increasing(e, unitPrice) {
     return await fetch(`/order/orderLine`, {
       method: "POST",
       headers: {
@@ -28,7 +28,7 @@ const Products = ({ heading, items }) => {
       body: JSON.stringify({
         itemId: e,
         orderId: responseOrderLine ? responseOrderLine.orderId : null,
-        totalPriceOfOrderLine: 0,
+        totalPriceOfOrderLine: unitPrice,
       }),
     })
       .then((response) => response.json())
@@ -102,7 +102,8 @@ const Products = ({ heading, items }) => {
                               ? item.payload.quantity
                               : 0;
                             let newItem = (item.payload = await Increasing(
-                              item._id
+                              item._id,
+                              item.unitPrice
                             ));
                             setResponseOrderLine(newItem);
                             setModalShow(hasExtras(item, beforeQuantity));
@@ -176,10 +177,6 @@ const Products = ({ heading, items }) => {
             ) : (
               <OrdersPreview />
             )}
-            <NavLink
-              activeClassName="is-active"
-              to="/gate-away-payment"
-            ></NavLink>
           </div>
         </div>
       </div>

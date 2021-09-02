@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import TickBox from "./tickBox";
-import { addItemToOrder } from "../../../middleware/addItemHandler";
 
 export default function MyVerticallyCenteredModal(props) {
   return (
