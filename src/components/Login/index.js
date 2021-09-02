@@ -55,6 +55,7 @@ export default function LogIn() {
                 <div className="form-group">
                   <label>Email address</label>
                   <Field
+                    placeholder="Insert your email"
                     name="email"
                     type="text"
                     className={
@@ -71,6 +72,7 @@ export default function LogIn() {
                 <div className="form-group">
                   <label>Insert Password</label>
                   <Field
+                    placeholder="Insert your password"
                     name="password"
                     type="password"
                     className={
@@ -98,7 +100,7 @@ export default function LogIn() {
                       Login
                     </button>
                   </div>
-                  <div className="form-group-forgot-password col-12 text-right">
+                  <div className="form-group-forgot-password mt-1 col-12 text-right">
                     <Link onClick={() => setDisplayer(false)}>
                       Forgot Password?
                     </Link>

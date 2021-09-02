@@ -17,23 +17,22 @@ export default function RegisterOrSignIn(props) {
     >
       <Modal.Body>
         {displayer == true ? <LogIn /> : <Register />}
-        <Link
-          className="login_link"
+        <button
+          className="login_button mt-5"
           onClick={() => {
             setDisplayer(true);
           }}
         >
-          Login
-        </Link>
-        <span> or </span>
-        <Link
-          className="register_link"
+          Continue with Facebook
+        </button>
+        <button
+          className="register_button mt-2"
           onClick={() => {
             setDisplayer(false);
           }}
         >
-          Register
-        </Link>
+          CREATE A NEW ACCOUNT
+        </button>
       </Modal.Body>
     </Modal>
   );
