@@ -1,16 +1,20 @@
+.register-container {
+  padding: 2rem;
+}
 .card-header-h3 {
   text-align-last: center;
   background-color: none;
 }
-.modal-body h6 {
-  font-size: 1rem;
-  text-align: center;
+.form-control-register {
+  margin-bottom: 2rem;
+  margin: 0;
+  padding: 0;
 }
-.modal-body h6 a {
-  text-decoration: underline;
-  color: black;
+.form-control-register-label {
+  margin: 0;
+  padding: 0;
 }
-.form-control-email-box {
+.form-control-register-box {
   display: block;
   width: 100%;
   font-size: 1rem;
@@ -25,22 +29,20 @@
   border-bottom: 1px solid rgb(95, 94, 94);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.form-group-button {
-  padding: 0px;
-  text-align: center;
-}
-.form-group-button .btn {
+.register-button {
   background-color: red;
   width: 100%;
   border-radius: 5px;
   box-shadow: 0px 3px rgba(0, 0, 0, 0.315);
   border: none;
+  color: white;
 }
-.form-group-forgot-password {
-  text-align-last: center;
-}
-.form-group-forgot-password a {
-  color: rgb(0, 0, 0);
-  font-size: 1rem;
-  text-decoration: underline;
+.back-to-login-button {
+  margin-bottom: 40%;
+  background-color: rgb(56, 56, 56);
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0px 3px rgba(0, 0, 0, 0.315);
+  border: none;
+  color: white;
 }

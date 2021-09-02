@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import { Login } from "../../servicesFetch/accountServicesFetch";
 import ForgotPassword from "../ForgotPassword";
 import "./index.css";
-export default function LogIn() {
+export default function LogIn(props) {
+  console.log(props.state);
   const history = useHistory();
   const [displayer, setDisplayer] = useState(true);
   const [responseMessage, setResponseMessage] = useState([]);
@@ -100,7 +101,7 @@ export default function LogIn() {
                       Login
                     </button>
                   </div>
-                  <div className="form-group-forgot-password mt-1 col-12 text-right">
+                  <div className="form-group-forgot-password mt-1 mb-5 col-12 text-right">
                     <Link onClick={() => setDisplayer(false)}>
                       Forgot Password?
                     </Link>

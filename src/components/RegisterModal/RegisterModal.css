@@ -32,9 +32,10 @@
 }
 .modal-body {
   padding: 3rem;
+  overflow: hidden;
 }
 .main_modal_login .modal-dialog .modal-content {
-  height: 550px;
+  height: 650px;
 }
 .modal-content .modal-body .card-body {
   padding: 0;
@@ -59,6 +60,7 @@
   box-shadow: 0px 3px rgba(0, 0, 0, 0.315);
   border: none;
 }
+
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 350px;
