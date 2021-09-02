@@ -7,28 +7,39 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: center;
   font-weight: 700;
+  height: 80px;
+  z-index: 999;
+  border-bottom: 1px solid #fff;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+`;
+export const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 100px;
 `;
 export const NavLink = styled(Link)`
-  color: white;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
+  color: #fff;
+  //color: #000;
+  font-size: 1.5rem;
+  align-self: center;
   text-decoration: none;
   cursor: pointer;
-
-  @media screen and (max-width: 400px) {
-    position: absolute;
-    top: 10px;
-    left: 25px;
-  }
+  flex: 1;
 `;
-export const NavIcon = styled.div`
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
+export const NavLogin = styled.div`
   cursor: pointer;
   color: white;
+  align-self: center;
+`;
+export const NavIcon = styled.div`
+  align-self: center;
+  cursor: pointer;
+  color: white;
+  padding-left: 30px;
 
   p {
     color: #e54b4b;
@@ -36,9 +47,9 @@ export const NavIcon = styled.div`
     font-weight: bold;
   }
 `;
-
-export const Bars = styled(IoMenu)`
-  color: #e54b4b;
+export const Burger = styled(IoMenu)`
+  //color: #e54b4b;
+  color: #fff;
   font-size: 2rem;
   transform: translate(-45%, -10%);
 `;

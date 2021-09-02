@@ -1,14 +1,19 @@
-import React from "react";
-import { Nav, NavIcon, NavLink, Bars } from "./Navbar";
+import React, {useState} from "react";
+import {Nav, NavIcon, Burger, Container, NavLink, NavLogin} from "./Navbar";
+import RegisterOrSignIn from "../RegisterModal";
 const Navbar = ({ toggle }) => {
+  const [showModal, setModal] = useState(false);
   return (
-    <>
-      <Nav>
+    <Nav>
+      <Container>
+        <NavLink to="/">El Milagro</NavLink>
+        <NavLogin onClick={() => setModal(true) }>Log in</NavLogin>
+        <RegisterOrSignIn show={showModal} onHide={() => setModal(false)}/>
         <NavIcon onClick={toggle}>
-          <Bars />
+          <Burger />
         </NavIcon>
-      </Nav>
-    </>
+      </Container>
+    </Nav>
   );
 };
 export default Navbar;
