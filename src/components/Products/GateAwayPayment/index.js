@@ -1,90 +1,218 @@
-import React from "react";
-import OrdersPreview from "../PreviewOrder";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./CheckOut.css";
-
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { useHistory } from "react-router-dom";
+import * as Yup from "yup";
+import { Link } from "react-router-dom";
 const GateAwayPayment = () => {
-  return {
-    /* <div class="container py-5">
-    <div class="row mb-4">
-        <div class="col-lg-8 mx-auto text-center">
-            <h1 class="display-6">Bootstrap Payment Forms</h1>
-        </div>
-    </div> 
-    <div class="row">
-        <div class="col-lg-6 mx-auto">
-            <div class="card ">
-                <div class="card-header">
-                    <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
-                        <!-- Credit card form tabs -->
-                        <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-                            <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
-                            <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
-                            <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
-                        </ul>
-                    </div>
-                    <div class="tab-content">
-                        <div id="credit-card" class="tab-pane fade show active pt-3">
-                            <form role="form" onsubmit="event.preventDefault()">
-                                <div class="form-group"> <label for="username">
-                                        <h6>Card Owner</h6>
-                                    </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control "> </div>
-                                <div class="form-group"> <label for="cardNumber">
-                                        <h6>Card number</h6>
-                                    </label>
-                                    <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required>
-                                        <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-8">
-                                        <div class="form-group"> <label><span class="hidden-xs">
-                                                    <h6>Expiration Date</h6>
-                                                </span></label>
-                                            <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                                                <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                                            </label> <input type="text" required class="form-control"> </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
-                            </form>
-                        </div>
-                    </div>
-                    <div id="paypal" class="tab-pane fade pt-3">
-                        <h6 class="pb-2">Select your paypal account type</h6>
-                        <div class="form-group "> <label class="radio-inline"> <input type="radio" name="optradio" checked> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5">International </label></div>
-                        <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> </p>
-                        <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
-                    </div>
-                    <div id="net-banking" class="tab-pane fade pt-3">
-                        <div class="form-group "> <label for="Select Your Bank">
-                                <h6>Select your Bank</h6>
-                            </label> <select class="form-control" id="ccmonth">
-                                <option value="" selected disabled>--Please select your Bank--</option>
-                                <option>Bank 1</option>
-                                <option>Bank 2</option>
-                                <option>Bank 3</option>
-                                <option>Bank 4</option>
-                                <option>Bank 5</option>
-                                <option>Bank 6</option>
-                                <option>Bank 7</option>
-                                <option>Bank 8</option>
-                                <option>Bank 9</option>
-                                <option>Bank 10</option>
-                            </select> </div>
-                        <div class="form-group">
-                            <p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed Payment</button> </p>
-                        </div>
-                        <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
-                    </div> 
-                </div>
-            </div>
-        </div>
-    </div> */
+  const history = useHistory();
+  const [displayer, setDisplayer] = useState(true);
+  const [responseMessage, setResponseMessage] = useState([]);
+  console.log("creo", history);
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    acceptTerms: false,
   };
+  const handleFormSubmit = ({ email, password }, { setSubmitting }) => {
+    // sendingTheData(email, password, setSubmitting);
+  };
+
+  /*   async function sendingTheData(email, password, setSubmitting) {
+    Login(email, password)
+      .then(() => {
+        const { from } = history.location.state || {
+          from: { pathname: "/" },
+        };
+        history.push(from);
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        setResponseMessage(error);
+      });
+  } */
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Email is invalid").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-md-12 col-lg-6">
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleFormSubmit}
+            className="register-container"
+          >
+            {({ errors, touched, isSubmitting }) => (
+              <Form>
+                <h3 className="card-header-h3">Your information</h3>
+                <div className="card-body ">
+                  <div className="form-group form-control-register">
+                    <label className="form-control-register-label">
+                      First Name
+                    </label>
+                    <Field
+                      placeholder="Name"
+                      name="firstName"
+                      type="text"
+                      className={
+                        "form-control-register-box" +
+                        (errors.firstName && touched.firstName
+                          ? " is-invalid"
+                          : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="firstName"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group form-control-register">
+                    <label className="form-control-register-label">
+                      Last Name
+                    </label>
+                    <Field
+                      placeholder="Surname"
+                      name="lastName"
+                      type="text"
+                      className={
+                        "form-control-register-box" +
+                        (errors.lastName && touched.lastName
+                          ? " is-invalid"
+                          : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="lastName"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group form-control-register">
+                    <label className="form-control-register-label">Email</label>
+                    <Field
+                      placeholder="Insert your email"
+                      name="email"
+                      type="text"
+                      className={
+                        "form-control-register-box" +
+                        (errors.email && touched.email ? " is-invalid" : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group form-control-register">
+                    <label className="form-control-register-label">Phone</label>
+                    <Field
+                      placeholder="Your phone number"
+                      name="phone"
+                      type="text"
+                      className={
+                        "form-control-register-box" +
+                        (errors.phone && touched.phone ? " is-invalid" : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="phone"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group form-control-register">
+                    <label className="form-control-register-label">
+                      Password
+                    </label>
+                    <Field
+                      placeholder="Insert your password"
+                      name="password"
+                      type="password"
+                      className={
+                        "form-control-register-box" +
+                        (errors.password && touched.password
+                          ? " is-invalid"
+                          : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group form-control-register">
+                    <label className="form-control-register-label">
+                      Confirm Password
+                    </label>
+                    <Field
+                      placeholder="Insert your password again"
+                      name="confirmPassword"
+                      type="password"
+                      className={
+                        "form-control-register-box" +
+                        (errors.confirmPassword && touched.confirmPassword
+                          ? " is-invalid"
+                          : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="confirmPassword"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group form-check">
+                    <Field
+                      type="checkbox"
+                      name="acceptTerms"
+                      id="acceptTerms"
+                      className={
+                        "form-check-input " +
+                        (errors.acceptTerms && touched.acceptTerms
+                          ? " is-invalid"
+                          : "")
+                      }
+                    />
+                    <label htmlFor="acceptTerms" className="form-check-label">
+                      Accept Terms & Conditions
+                    </label>
+                    <ErrorMessage
+                      name="acceptTerms"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="register-button"
+                    >
+                      {isSubmitting && (
+                        <span className="spinner-border spinner-border-sm mr-1"></span>
+                      )}
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
+        <div className="col-md-12 col-lg-6">sadasdasd</div>
+      </div>
+    </div>
+  );
 };
 export default GateAwayPayment;

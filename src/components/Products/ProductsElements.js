@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom";
+import {IoArrowBackOutline, IoBicycle, IoStorefront} from "react-icons/io5";
 
 export const ProductsContainer = styled.div`
   background: white;
@@ -14,13 +16,12 @@ export const ProductCard = styled.div`
   border: 1px solid darkgray;
   display: flex;
   margin: 1rem 0rem;
-  padding: -1px 10px 0px 10spx;
+  padding: -1px 10px 0px 10px;
 `;
-export const ProductsHeading = styled.h1`
-  font-size: clamp(2rem, 2.5vw, 3rem);
-  text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+export const ProductsHeading = styled.h4`
+  margin: 0;
+  color: #ffffff;
+  flex: 1;
 `;
 
 export const ProductInfo = styled.div`
@@ -72,4 +73,53 @@ export const ProductButton = styled.button`
     cursor: pointer;
     color: #000;
   } */
+`;
+export const ProductBackToHome = styled(Link)`
+  text-align: center;
+  color: #fff;
+  background-color: #bd4242;
+  font-size: 16px;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+export const ProductArrow = styled(IoArrowBackOutline)`
+  color: #fff;
+  font-size: 20px;
+`;
+export const RestarurantStatus = styled.div`
+  margin-left: 10px;
+  padding: 3px 8px;
+  border-radius: 15px;
+  
+  &.status-on {
+    color: #fff;
+    background-color: #029875;
+  }
+  &.status-off {
+    color: #fff;
+    background-color: #bd4242;
+  }
+`;
+export const IconTakeAway = styled(IoStorefront)`
+  color: #fff;
+  font-size: 20px;
+  padding-left: 5px;
+`;
+export const IconDelivery = styled(IoBicycle)`
+  color: #fff;
+  font-size: 20px;
+  padding-left: 5px;
+`;
+export const ProductPromo = styled.div`
+  align-self: center;
+  background-color: #bd4242;
+  padding: 15px 0;
+  margin: 10px 50px;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
 `;

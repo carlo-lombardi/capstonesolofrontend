@@ -38,12 +38,12 @@ const Routing = () => {
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Switch>
         {/* <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} /> */}
-        <PrivateRoute path="/gate-away-payment" component={GateAwayPayment} />
         <PrivateRoute
           path="/admin"
           roles={[Role.Admin]}
           component={ResetPassword}
         />
+        <Route path="/gate-away-payment" component={GateAwayPayment} />
         <Route path="/menu" component={App} />
         <Route path="/account/reset-password" component={ResetPassword} />
         <Route path="/account/verify-email" component={VerifyEmail} />

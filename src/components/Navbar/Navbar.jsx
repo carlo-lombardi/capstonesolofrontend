@@ -14,6 +14,7 @@ export const Nav = styled.nav`
   right: 0;
   left: 0;
   top: 0;
+  background: linear-gradient(to bottom,rgba(0,0,0,.5),rgba(102,102,102,0));
 `;
 export const Container = styled.div`
   display: flex;
