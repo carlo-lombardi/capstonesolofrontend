@@ -13,6 +13,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink } from "react-router-dom";
 import RegisterOrSignIn from "../../RegisterModal";
+import PickUp from "../PickUp";
 
 const OrdersPreview = (newItemResponse) => {
   const [displayer, setDisplayer] = useState(true);
@@ -32,23 +33,6 @@ const OrdersPreview = (newItemResponse) => {
     setDisplayer(false);
   };
 
-  const PickUp = (newItemsResponsed) => {
-    console.log("funciona?", newItemsResponsed[0]);
-    // changeable();
-    /*     useEffect(() => {
-      fetch(`/items/`)
-        .then((response) => response.json())
-        .then((data) => setUpdateItems(data));
-    }, []); */
-    return (
-      <PickUpContainer className="col-lg-12">
-        <div className="row">
-          <PickUpTimeTitle className="col-lg-12">Pick-Up Time</PickUpTimeTitle>
-          <div className="col-lg-12">a</div>
-        </div>
-      </PickUpContainer>
-    );
-  };
   const Delivery = () => {
     return (
       <PickUpContainer className="col-lg-12">

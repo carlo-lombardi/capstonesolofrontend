@@ -5,6 +5,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import PaypalIntegration from "./Paypallntegration";
+import OrderDetails from "./OrderDetail";
+import InitAutocomplete from "../../GoogleMapAddress";
+import SearchLocationInput from "../../GoogleMapAddress";
 const GateAwayPayment = () => {
   const history = useHistory();
   const [displayer, setDisplayer] = useState(true);
@@ -42,8 +46,8 @@ const GateAwayPayment = () => {
   });
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md-12 col-lg-6">
+      <div className="row mt-5">
+        <div className="col-md-12 col-lg-6 mt-5">
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -130,87 +134,17 @@ const GateAwayPayment = () => {
                       className="invalid-feedback"
                     />
                   </div>
-                  <div className="form-group form-control-register">
-                    <label className="form-control-register-label">
-                      Password
-                    </label>
-                    <Field
-                      placeholder="Insert your password"
-                      name="password"
-                      type="password"
-                      className={
-                        "form-control-register-box" +
-                        (errors.password && touched.password
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="password"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                  <div className="form-group form-control-register">
-                    <label className="form-control-register-label">
-                      Confirm Password
-                    </label>
-                    <Field
-                      placeholder="Insert your password again"
-                      name="confirmPassword"
-                      type="password"
-                      className={
-                        "form-control-register-box" +
-                        (errors.confirmPassword && touched.confirmPassword
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
-                      name="confirmPassword"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                  <div className="form-group form-check">
-                    <Field
-                      type="checkbox"
-                      name="acceptTerms"
-                      id="acceptTerms"
-                      className={
-                        "form-check-input " +
-                        (errors.acceptTerms && touched.acceptTerms
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <label htmlFor="acceptTerms" className="form-check-label">
-                      Accept Terms & Conditions
-                    </label>
-                    <ErrorMessage
-                      name="acceptTerms"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="register-button"
-                    >
-                      {isSubmitting && (
-                        <span className="spinner-border spinner-border-sm mr-1"></span>
-                      )}
-                      Register
-                    </button>
-                  </div>
                 </div>
               </Form>
             )}
           </Formik>
+          <SearchLocationInput />
+          {/* <InitAutocomplete /> */}
+          <PaypalIntegration />
         </div>
-        <div className="col-md-12 col-lg-6">sadasdasd</div>
+        <div className="col-md-12 col-lg-6 mt-5">
+          <OrderDetails />
+        </div>
       </div>
     </div>
   );

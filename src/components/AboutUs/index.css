@@ -2,6 +2,9 @@
   width: 100%;
   display: block;
 }
+.image-about-us {
+  border-radius: 20px;
+}
 .about-us-text-semi-port {
   margin-top: 7% !important;
   border-width: 30px;

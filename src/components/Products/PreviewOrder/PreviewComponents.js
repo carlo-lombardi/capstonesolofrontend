@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
 export const PreviewMainContainer = styled.div`
+  margin-top: 20px;
+  border-radius: 5px;
+  z-index: 0;
+  background-color: white;
   height: 50%;
   width: 100%;
 `;
 
 export const PreviewContainer = styled.div`
+  background-color: white;
   border: 2px solid blue;
   height: 50%;
   max-height: 100%;
@@ -21,7 +26,7 @@ export const ButtonOrderPickUp = styled.button`
   height: 50px;
   width: 100%;
   border: none;
-  background-color: red;
+  background-color: #570404;
   color: white;
   &:hover {
     background-color: black;
@@ -33,7 +38,7 @@ export const ButtonOrderDelivery = styled.button`
   height: 50px;
   width: 100%;
   border: none;
-  background-color: red;
+  background-color: #570404;
   color: white;
   &:hover {
     background-color: black;
@@ -41,8 +46,9 @@ export const ButtonOrderDelivery = styled.button`
   }
 `;
 export const PickUpContainer = styled.div`
+  background-color: white;
   border: 1px solid darkgray;
-  height: 100px;
+  height: 400px;
 `;
 export const PickUpTimeTitle = styled.div`
   border: 1px solid darkgray;
@@ -52,7 +58,7 @@ export const ButtonCheckOut = styled.button`
   height: 50px;
   width: 100%;
   border: none;
-  background-color: red;
+  background-color: #570404;
   color: white;
   &:hover {
     background-color: black;

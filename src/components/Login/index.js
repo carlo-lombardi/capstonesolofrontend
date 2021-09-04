@@ -25,7 +25,7 @@ export default function LogIn(props) {
     Login(email, password)
       .then(() => {
         const { from } = history.location.state || {
-          from: { pathname: "/" },
+          from: { pathname: "/gate-away-payment" },
         };
         history.push(from);
       })

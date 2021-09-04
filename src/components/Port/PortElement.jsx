@@ -38,7 +38,7 @@ export const PortItems = styled.div`
 export const PortTitle = styled.h1`
   font-size: clamp(2.5rem, 10vw, 5rem);
   margin-bottom: 2rem;
-  box-shadow: 3px 5px red;
+  box-shadow: 3px 5px #610404;
   letter-spacing: 3px;
 `;
 export const PortAboutUs = styled.div`

@@ -1,56 +1,59 @@
 #orderNow {
-    background-color: #fff;
-    margin-top: -32px;
+  background-color: #fff;
+  margin-top: -32px;
 }
 .lazy-gap {
-    height: 112px;
-    background-color: #bd4242;
+  height: 112px;
+  background-color: #610404;
 }
 .black-background {
-    background-color: #000;
-    width: 100%;
-    position: absolute;
-    height: 200px;
-    z-index: 0;
+  background-color: #201e1e;
+  width: 100%;
+  position: absolute;
+  height: 200px;
+  z-index: 0;
 }
 .back-home-link:hover {
-    color: #fff;
-    text-underline: none;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 .back-home-text {
-    flex: 1;
+  flex: 1;
 }
 .menu-page {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 .menu-container {
-    flex: 65%;
-    padding: 10px 2.5rem;
-    z-index: 10;
+  flex: 65%;
+  padding: 10px 2.5rem;
+  z-index: 10;
 }
 .preview {
-    flex: 35%;
+  flex: 35%;
+  margin-top: 20px;
+  align-self: flex-start;
+  top: 80px;
+  position: sticky;
+  position: -webkit-sticky;
 }
 .flex-group {
-    display: flex;
-    color: #fff;
+  display: flex;
+  color: #fff;
 }
 .flex-group.end-column {
-    flex-direction: column;
-    align-items: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .flex-al-self {
-    align-self: center;
+  align-self: center;
 }
 .flex-1 {
-    flex: 1;
+  flex: 1;
 }
 .marT-5 {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 .search {
-    width: 50%;
+  width: 50%;
 }
-

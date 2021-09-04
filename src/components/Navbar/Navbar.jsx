@@ -14,7 +14,16 @@ export const Nav = styled.nav`
   right: 0;
   left: 0;
   top: 0;
-  background: linear-gradient(to bottom,rgba(0,0,0,.5),rgba(102,102,102,0));
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(102, 102, 102, 0)
+  );
+  & {
+    @media screen and (max-height: 600px) {
+      top: -160px;
+    }
+  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -24,7 +33,6 @@ export const Container = styled.div`
 `;
 export const NavLink = styled(Link)`
   color: #fff;
-  //color: #000;
   font-size: 1.5rem;
   align-self: center;
   text-decoration: none;

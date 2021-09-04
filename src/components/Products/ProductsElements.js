@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
-import {IoArrowBackOutline, IoBicycle, IoStorefront} from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { IoArrowBackOutline, IoBicycle, IoStorefront } from "react-icons/io5";
 
 export const ProductsContainer = styled.div`
   background: white;
@@ -50,11 +50,13 @@ export const Counter = styled.span`
 `;
 export const ProductButton = styled.button`
   font-size: 1rem;
-  margin: 35px 0rem;
-  padding: 0rem 1rem;
+  margin: 41px 0rem;
+  padding: -1%;
+  border-radius: -5px;
   border: none;
-  background-color: #eaeaea;
-  color: black;
+  color: white;
+  background-color: #610404;
+  -webkit-transition: 0.2 ease-out;
   transition: 0.2 ease-out;
   /*  &::before {
     content: "+";
@@ -77,7 +79,7 @@ export const ProductButton = styled.button`
 export const ProductBackToHome = styled(Link)`
   text-align: center;
   color: #fff;
-  background-color: #bd4242;
+  background-color: #570404;
   font-size: 16px;
   padding: 8px;
   cursor: pointer;
@@ -94,7 +96,7 @@ export const RestarurantStatus = styled.div`
   margin-left: 10px;
   padding: 3px 8px;
   border-radius: 15px;
-  
+
   &.status-on {
     color: #fff;
     background-color: #029875;
@@ -116,7 +118,7 @@ export const IconDelivery = styled(IoBicycle)`
 `;
 export const ProductPromo = styled.div`
   align-self: center;
-  background-color: #bd4242;
+  background-color: #610404;
   padding: 15px 0;
   margin: 10px 50px;
   text-align: center;
