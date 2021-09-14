@@ -14,43 +14,56 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink } from "react-router-dom";
 import RegisterOrSignIn from "../../RegisterModal";
 import PickUp from "../PickUp";
+import Delivery from "../Delivery";
 
 const OrdersPreview = (newItemResponse) => {
+  console.log("newItemResponse", newItemResponse);
+  useEffect(() => {
+    localStorage.setItem(
+      "orderId",
+      newItemResponse &&
+        newItemResponse.newItemResponse &&
+        newItemResponse.newItemResponse.orderId
+        ? newItemResponse.newItemResponse.orderId
+        : newItemResponse.newItemResponse
+    );
+  }, [newItemResponse]);
   const [displayer, setDisplayer] = useState(true);
   const [modalShow, setModalShow] = useState(false);
-  console.log("este es", newItemResponse);
-  /* function changeable(newItemResponse) {
-    if (newItemResponse) {
-      return console.log(newItemResponse);
-    } else {
-      return console.log("aun no");
-    }
-  } */
-  const ShowingThePickUpTimer = () => {
-    setDisplayer(true);
-  };
-  const ShowingTheDeliveryTimer = () => {
-    setDisplayer(false);
-  };
 
-  const Delivery = () => {
-    return (
-      <PickUpContainer className="col-lg-12">
-        <h6>Delivery Time</h6>
-      </PickUpContainer>
-    );
+  const ShowingThePickUpTimer = (e) => {
+    e.preventDefault();
+    setDisplayer(true);
+    const pickUp = document.getElementById("pickUpButton");
+    pickUp.style.backgroundColor = "black";
+    const delivery = document.getElementById("deliveryButton");
+    delivery.style.backgroundColor = "red";
+  };
+  const ShowingTheDeliveryTimer = (e) => {
+    e.preventDefault();
+    setDisplayer(false);
+    const pickUp = document.getElementById("pickUpButton");
+    pickUp.style.backgroundColor = "red";
+    const delivery = document.getElementById("deliveryButton");
+    delivery.style.backgroundColor = "black";
   };
 
   return (
     <PreviewMainContainer className="container-fluid">
-      <div className="row">
+      <div className="row way-selected">
         <ButtonContainer className="col-lg-6">
-          <ButtonOrderPickUp onClick={ShowingThePickUpTimer}>
+          <ButtonOrderPickUp
+            id="pickUpButton"
+            onClick={(e) => ShowingThePickUpTimer(e)}
+          >
             PickUp
           </ButtonOrderPickUp>
         </ButtonContainer>
         <ButtonContainer className="col-lg-6">
-          <ButtonOrderDelivery onClick={ShowingTheDeliveryTimer}>
+          <ButtonOrderDelivery
+            id="deliveryButton"
+            onClick={(e) => ShowingTheDeliveryTimer(e)}
+          >
             Delivery
           </ButtonOrderDelivery>
         </ButtonContainer>
@@ -58,9 +71,25 @@ const OrdersPreview = (newItemResponse) => {
       <div className="row">
         <div className="col-lg-12">
           {displayer == true ? (
-            <PickUp responsesUpdated={newItemResponse} />
+            <PickUp
+              orderInfo={
+                newItemResponse &&
+                newItemResponse.newItemResponse &&
+                newItemResponse.newItemResponse.orderId
+                  ? newItemResponse.newItemResponse
+                  : { newItemResponse: { orderId: -1 } }
+              }
+            />
           ) : (
-            <Delivery />
+            <Delivery
+              orderInfo={
+                newItemResponse &&
+                newItemResponse.newItemResponse &&
+                newItemResponse.newItemResponse.orderId
+                  ? newItemResponse.newItemResponse
+                  : { newItemResponse: { orderId: -1 } }
+              }
+            />
           )}
         </div>
       </div>
