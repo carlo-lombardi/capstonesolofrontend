@@ -50,7 +50,7 @@ export default function LogIn(props) {
             <Form>
               <h3 className="card-header-h3">LOG IN</h3>
               <h6>
-                or choose <Link>fast track</Link>
+                or choose <Link to="/gate-away-payment">fast track</Link>
               </h6>
               <div className="card-body">
                 <div className="form-group">

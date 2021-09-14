@@ -134,11 +134,11 @@ const GateAwayPayment = () => {
                       className="invalid-feedback"
                     />
                   </div>
+                  <SearchLocationInput />
                 </div>
               </Form>
             )}
           </Formik>
-          <SearchLocationInput />
           {/* <InitAutocomplete /> */}
           <PaypalIntegration />
         </div>

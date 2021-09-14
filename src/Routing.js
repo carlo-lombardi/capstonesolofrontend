@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Footer from "./components/Footer";
 import App from "./App";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import GateAwayPayment from "./components/Products/GateAwayPayment/index";
 import { Port } from "./components/Port";
 import Navbar from "./components/Navbar";
@@ -11,7 +11,7 @@ import { VerifyEmail } from "./components/verifyEmail";
 import { PrivateRoute } from "./components/PrivateRoutes/PrivateRoute";
 import ResetPassword from "./components/ResetPassword";
 import { Role } from "./servicesHelp/roles";
-import { userSubjectValue } from "./servicesFetch/accountServicesFetch";
+// import { userSubjectValue } from "./servicesFetch/accountServicesFetch";
 
 const Routing = () => {
   /*   const history = useHistory();

@@ -13,7 +13,9 @@ export const ProductWrapper = styled.div`
 `;
 
 export const ProductCard = styled.div`
-  border: 1px solid darkgray;
+  color: black;
+  border-radius: 5px;
+  border: 1px solid #d8d8d8;
   display: flex;
   margin: 1rem 0rem;
   padding: -1px 10px 0px 10px;
@@ -44,42 +46,23 @@ export const ProductPrice = styled.p`
 `;
 export const Counter = styled.span`
   border: 1px solid gray;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 5px;
+  margin: 9px;
+  padding: 2px;
+  border-radius: 8px;
 `;
 export const ProductButton = styled.button`
-  font-size: 1rem;
   margin: 41px 0rem;
   padding: -1%;
   border-radius: -5px;
   border: none;
-  color: white;
-  background-color: #610404;
+  -webkit-transition: 0.2 ease-out;
   -webkit-transition: 0.2 ease-out;
   transition: 0.2 ease-out;
-  /*  &::before {
-    content: "+";
-    font-size: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-family: courier;
-    color: white;
-  }
-  &:hover {
-    background: #ffc500;
-    transition: 0.2s ease-out;
-    cursor: pointer;
-    color: #000;
-  } */
 `;
 export const ProductBackToHome = styled(Link)`
   text-align: center;
   color: #fff;
-  background-color: #570404;
+  background-color: black;
   font-size: 16px;
   padding: 8px;
   cursor: pointer;
@@ -93,9 +76,11 @@ export const ProductArrow = styled(IoArrowBackOutline)`
   font-size: 20px;
 `;
 export const RestarurantStatus = styled.div`
-  margin-left: 10px;
-  padding: 3px 8px;
-  border-radius: 15px;
+  margin-left: 6px;
+  padding: 0px 18px;
+  border-radius: 10px;
+  width: 40%;
+  height: 25px;
 
   &.status-on {
     color: #fff;

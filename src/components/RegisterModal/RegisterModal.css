@@ -32,7 +32,7 @@
 }
 .modal-body {
   padding: 3rem;
-  overflow: hidden;
+  overflow: auto;
 }
 .main_modal_login .modal-dialog .modal-content {
   height: 650px;

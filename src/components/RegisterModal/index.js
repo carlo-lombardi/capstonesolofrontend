@@ -15,6 +15,7 @@ export default function RegisterOrSignIn(props) {
       centered
       className="main_modal_login"
     >
+      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         {displayer == true ? <LogIn /> : <Register />}
         <button

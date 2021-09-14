@@ -28,8 +28,7 @@ export const Nav = styled.nav`
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  margin: 0 100px;
+  width: 100vh;
 `;
 export const NavLink = styled(Link)`
   color: #fff;
@@ -57,7 +56,7 @@ export const NavIcon = styled.div`
   }
 `;
 export const Burger = styled(IoMenu)`
-  //color: #e54b4b;
+  color: #e54b4b;
   color: #fff;
   font-size: 2rem;
   transform: translate(-45%, -10%);

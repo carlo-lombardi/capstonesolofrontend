@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import AboutUs from "../AboutUs/index";
+// import AboutUs from "../AboutUs/index";
 import {
   PortContainer,
   PortTitle,
@@ -28,7 +28,7 @@ export const Port = () => {
           </PortItems>
         </PortContent>
       </PortContainer>
-      <AboutUs />
+      {/* <AboutUs /> */}
     </>
   );
 };

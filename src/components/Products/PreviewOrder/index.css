@@ -7,3 +7,12 @@
 .preview-order-checkout-container {
   padding: 35px 0 0 0 !important;
 }
+.container-fluid > .way-selected {
+  width: 90% !important;
+  margin-left: 5% !important;
+}
+@media (max-width: 1050px) {
+  .right {
+    display: none;
+  }
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./toggle.scss";
 
 const TickBox = () => {
@@ -34,10 +34,25 @@ const TickBox = () => {
       unitPrice: 2.0,
     },
   ];
-
+  const [wholeItems, setWholeItems] = useState([]);
+  useEffect(() => {
+    toppingsForPacks();
+  }, []);
+  console.log(wholeItems);
+  async function toppingsForPacks() {
+    try {
+      return await fetch(`/items`)
+        .then((response) => response.json())
+        .then((data) => {
+          setWholeItems(data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
-      {toppings.map((topping, idx) => {
+      {wholeItems.map((topping, idx) => {
         return (
           <div class="main_container">
             <label class="checkbox">
@@ -76,6 +91,7 @@ const TickBox = () => {
             </label>
             <div class="topping_pha">
               <h6>{topping.name}</h6>
+              <span>{topping.unitPrice}</span>
             </div>
           </div>
         );

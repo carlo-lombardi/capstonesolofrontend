@@ -24,7 +24,7 @@ const loadScript = (url, callback) => {
 function handleScriptLoad(updateQuery, autoCompleteRef) {
   autoComplete = new window.google.maps.places.Autocomplete(
     autoCompleteRef.current,
-    { types: ["(cities)"], componentRestrictions: { country: "us" } }
+    { types: ["(cities)"], componentRestrictions: { country: "ie" } }
   );
   autoComplete.setFields(["address_components", "formatted_address"]);
   autoComplete.addListener("place_changed", () =>
@@ -45,8 +45,8 @@ function SearchLocationInput() {
 
   useEffect(() => {
     loadScript(
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyAZvObCB1q963yYsuzNV72sPnJxvF5dLeA&libraries=places",
-      // `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places`,
+      // "https://maps.googleapis.com/maps/api/geocode/json?address=firhouse&key=AIzaSyAZvObCB1q963yYsuzNV72sPnJxvF5dLeA",
+      `https://maps.googleapis.com/maps/api/js?key=AIzaSyAZvObCB1q963yYsuzNV72sPnJxvF5dLeA&libraries=places`,
       () => handleScriptLoad(setQuery, autoCompleteRef)
     );
   }, []);

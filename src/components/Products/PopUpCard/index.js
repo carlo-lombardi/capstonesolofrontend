@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import TickBox from "./tickBox";
-
+import "./index.css";
 export default function MyVerticallyCenteredModal(props) {
   return (
     <>
@@ -14,15 +14,11 @@ export default function MyVerticallyCenteredModal(props) {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
+            className="modal-toppings"
           >
-            <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title-vcenter">
-                {product.productName}
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+            <Modal.Header closeButton></Modal.Header>
+            <Modal.Body className="modal-toppings-body">
               <div>
-                <h5>{product.description}</h5>
                 <h4>Select Sauce</h4>
                 <TickBox />
                 <h4>Feeling thirsty ? </h4>
@@ -31,9 +27,6 @@ export default function MyVerticallyCenteredModal(props) {
                 <TickBox />
               </div>
             </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
             <Button>pay</Button>
           </Modal>
         );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Products from "./components/Products";
 import Feature from "./components/Feature";
-import { Router } from "react-router-dom";
+// import { Router } from "react-router-dom";
 
 const App = () => {
   const [items, setItems] = useState([]);
