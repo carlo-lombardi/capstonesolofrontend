@@ -11,6 +11,7 @@ import { VerifyEmail } from "./components/verifyEmail";
 import { PrivateRoute } from "./components/PrivateRoutes/PrivateRoute";
 import ResetPassword from "./components/ResetPassword";
 import { Role } from "./servicesHelp/roles";
+import CabifyOrder from "./loadingCabify";
 // import { userSubjectValue } from "./servicesFetch/accountServicesFetch";
 
 const Routing = () => {
@@ -47,6 +48,7 @@ const Routing = () => {
         <Route path="/menu" component={App} />
         <Route path="/account/reset-password" component={ResetPassword} />
         <Route path="/account/verify-email" component={VerifyEmail} />
+        <Route path="/cabify" component={CabifyOrder} />
       </Switch>
       <Footer />
     </Router>

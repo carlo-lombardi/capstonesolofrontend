@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./toggle.scss";
 
 const TickBox = () => {
-  const toppings = [
+  /*  const toppings = [
     {
       name: "Guacamole",
       description: "The best guac",
@@ -33,7 +33,7 @@ const TickBox = () => {
       description: "The best guac",
       unitPrice: 2.0,
     },
-  ];
+  ]; */
   const [wholeItems, setWholeItems] = useState([]);
   useEffect(() => {
     toppingsForPacks();

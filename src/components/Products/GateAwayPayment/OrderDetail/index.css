@@ -22,7 +22,10 @@
 .customer-comment {
   border-bottom: 4px solid rgba(173, 173, 173, 0.658);
 }
-
+.item-single-displayed {
+  justify-content: space-between;
+  display: flex;
+}
 .query-customer-area {
   display: block;
   width: 100%;

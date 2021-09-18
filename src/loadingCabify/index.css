@@ -1,0 +1,100 @@
+.loader-container {
+  padding: 0%;
+  height: 75vh;
+  margin-top: 10%;
+}
+.title-loader {
+  text-align: center;
+}
+
+.title-loader {
+  position: relative;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  white-space: nowrap;
+  border: 2px solid #222;
+  padding: 5px 11px 3px 11px;
+}
+.title-loader:before,
+.title-loader:after {
+  background-color: #c50000;
+  position: absolute;
+  content: "";
+  height: 7px;
+
+  width: 7px;
+  border-radius: 50%;
+  bottom: 12px;
+}
+.title-loader:before {
+  left: -20px;
+}
+.title-loader:after {
+  right: -20px;
+}
+
+.loader-container .bdsghZ:after {
+  content: "";
+  width: 100px;
+  height: 100px;
+  background: #00adb5;
+  animation: flBgdR 0.5s linear infinite;
+  position: absolute;
+  top: 139px;
+  left: -40px;
+  border-radius: 1px;
+}
+.loader-container .bdsghZ:before {
+  content: "";
+  width: 136px;
+  height: 11px;
+  background: #010815;
+  opacity: 0.1;
+  position: absolute;
+  top: 257px;
+  left: -57px;
+  border-radius: 85%;
+  animation: gnuxKW 0.5s linear infinite;
+}
+
+.logo-cabify {
+  text-align: center;
+  height: 10rem;
+}
+.logo-cabify img {
+  max-height: 100%;
+}
+.logo-cabify img {
+  -webkit-animation: mover 0.3s infinite alternate;
+  animation: mover 0.3s infinite alternate;
+}
+@-webkit-keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+.summary-order {
+  height: 30rem;
+}
+.summary-order h2 {
+  text-align: center;
+}
+/* .summary-order .redirect-link {
+  text-align: center;
+} */

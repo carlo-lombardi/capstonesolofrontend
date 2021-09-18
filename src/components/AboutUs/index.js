@@ -2,7 +2,7 @@ import React from "react";
 import "./index.css";
 import tacosPortada from "../../assest/tacosPortada.jpg";
 import tacosPortada2 from "../../assest/tacosPortada2.jpg";
-import carnitas from "../../assest/carnitas.jpg";
+// import carnitas from "../../assest/carnitas.jpg";
 import Carousel from "react-bootstrap/Carousel";
 
 export default function AboutUs() {

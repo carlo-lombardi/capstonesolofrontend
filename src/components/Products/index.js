@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ProductsElements.css";
 import {
@@ -40,6 +40,8 @@ const Products = ({ heading, items }) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        localStorage.setItem("orderId", data.orderId);
+        console.log("data.orderId", data.orderId);
         return data;
       });
   }
@@ -59,10 +61,10 @@ const Products = ({ heading, items }) => {
 
   const hasExtras = (item, beforeQuantity) => {
     return (
-      beforeQuantity == 0 &&
+      beforeQuantity === 0 &&
       item.isMain &&
       item.payload &&
-      item.payload.quantity == 1 &&
+      item.payload.quantity === 1 &&
       item.allowedItemTypes &&
       item.allowedItemTypes.length > 0
     );
@@ -119,7 +121,7 @@ const Products = ({ heading, items }) => {
                 <ProductPromo>Any Promotion will be added here</ProductPromo>
                 <ProductWrapper>
                   {items.map((item, index) => {
-                    if (item.itemType != titleLabel) {
+                    if (item.itemType !== titleLabel) {
                       return [
                         <h4>{(titleLabel = item.itemType)}</h4>,
                         <ProductCard key={index}>
@@ -224,11 +226,7 @@ const Products = ({ heading, items }) => {
           </div>
           <div className="col-xs-12 col-lg-6">
             <div className="preview">
-              {responseOrderLine ? (
-                <OrdersPreview newItemResponse={responseOrderLine} />
-              ) : (
-                <OrdersPreview newItemResponse={responseOrderLine} />
-              )}
+              <OrdersPreview newItemResponse={responseOrderLine} />
             </div>
           </div>
         </div>

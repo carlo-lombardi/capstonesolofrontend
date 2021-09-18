@@ -1,56 +1,81 @@
 import React, { useEffect, useState } from "react";
 import { Form, Dropdown, DropdownButton } from "react-bootstrap";
-import { OrderPost } from "../../../middleware/OrderManagement";
-import { initialize } from "./googleApi";
+import { OrderPost, SetOrderInfo } from "../../../middleware/OrderManagement";
+// import initialize from "../../GoogleMapAddress/index.js";
 import "./index.css";
+
+// function pickuptimeConstructor()
+// {
+//   const today = new Date();
+//   const currentTime = today.getHours();
+//   startHour =
+// };
 
 export default function Delivery(orderInfo) {
   const [comment, setCommentValue] = useState("");
   const [wholeProduct, setWholeProduct] = useState([]);
   const [searchEngine, setSearchEngine] = useState("");
   const [timeForDelivery, setTimeForDelivery] = useState("");
-  console.log(timeForDelivery);
+
+  console.log("orderInfo", orderInfo);
+
   const pickUpTime = [
     {
       name: "Pick Up at",
-      time: "12:15",
+      time: "12:15:00",
     },
     {
       name: "Pick Up at",
-      time: "12:30",
+      time: "12:30:00",
     },
     {
       name: "Pick Up at",
-      time: "12:45",
+      time: "12:45:00",
     },
     {
       name: "Pick Up at",
-      time: "13:00",
+      time: "13:00:00",
     },
   ];
-  useEffect(async () => {
+  /*   useEffect(async () => {
+    const payload = {
+      _id: orderInfo.orderInfo.orderId,
+      orderType: "Delivery",
+    };
+
+    if (timeForDelivery) payload.orderTime = timeForDelivery;
+
+    const dataResult = await OrderPost(payload);
+    // setWholeProduct(dataResult);
+  }, []); */
+
+  /* useEffect(async () => {
     const dataResult = await OrderPost({
       _id: orderInfo.orderInfo.orderId,
       orderType: "Delivery",
     });
-    setWholeProduct(dataResult);
-    setCommentValue(dataResult.order.comment);
-  }, [setCommentValue]);
+    return function cleanup() {
+      setCommentValue(dataResult.order.comment);
+    };
+  }, []); */
 
-  const SetComment = async (e) => {
+  /* const SetComment = async (e) => {
     e.preventDefault();
     setCommentValue(e.currentTarget.value);
     await OrderPost({
       comment: e.currentTarget.value,
     });
-  };
-  function handleSearchEngine(e) {
+  }; */
+  /*   function handleSearchEngine(e) {
     e.preventDefault();
     initialize(searchEngine);
-  }
-  function handleSelect(e) {
-    console.log(e);
-    // setValue(e);
+  }*/
+  function setListText(e, obj) {
+    // orderInfo.orderInfo.orderTime = e;
+    setTimeForDelivery(e);
+    console.log("objeto de select", obj);
+    obj.changeValue("Pick-up at " + e);
+    //obj.title = "Pick-up at " + e;
   }
   return (
     <div className="container">
@@ -59,7 +84,12 @@ export default function Delivery(orderInfo) {
           title="Pick-up at"
           id="dropdown-item-button"
           className="container-button"
-          onSelect={handleSelect}
+          onSelect={async (e) => {
+            setListText(e, this);
+            await SetOrderInfo({
+              orderTime: e,
+            });
+          }}
         >
           {pickUpTime.map((e, idx) => {
             return (
@@ -77,7 +107,7 @@ export default function Delivery(orderInfo) {
         </DropdownButton>
       </div>
       <div className="row item-selected">
-        <form onKeyUp={(e) => handleSearchEngine(e)}>
+        {/*         <form onKeyUp={(e) => handleSearchEngine(e)}>
           <input
             id="searchTextField"
             type="text"
@@ -87,7 +117,7 @@ export default function Delivery(orderInfo) {
             placeholder="Anything you want!"
           />
           <div id="filedGeoCode"></div>
-        </form>
+        </form> */}
       </div>
       <div className="row item-selected">
         {wholeProduct && wholeProduct.lines && wholeProduct.lines.length > 0 ? (
@@ -140,9 +170,15 @@ export default function Delivery(orderInfo) {
             <Form.Control
               as="textarea"
               rows={4}
-              value={comment}
+              // value={comment}
               className="query-customer-area"
-              onChange={async (e) => await SetComment(e)}
+              onBlur={async (e) =>
+                await SetOrderInfo({
+                  comment: e.currentTarget.value,
+                })
+              }
+              // onChange={async (e) => await SetComment(e)}
+              placeholder="Write for the chef"
             />
           </Form.Group>
         </Form>

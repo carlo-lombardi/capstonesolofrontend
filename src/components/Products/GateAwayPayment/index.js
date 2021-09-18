@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./CheckOut.css";
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -7,12 +7,13 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import PaypalIntegration from "./Paypallntegration";
 import OrderDetails from "./OrderDetail";
-import InitAutocomplete from "../../GoogleMapAddress";
-import SearchLocationInput from "../../GoogleMapAddress";
+// import InitAutocomplete from "../../GoogleMapAddress";
+// import SearchLocationInput from "../../GoogleMapAddress";
 const GateAwayPayment = () => {
   const history = useHistory();
   const [displayer, setDisplayer] = useState(true);
   const [responseMessage, setResponseMessage] = useState([]);
+  const orderId = localStorage.getItem("orderId");
   console.log("creo", history);
   const initialValues = {
     firstName: "",
@@ -23,30 +24,54 @@ const GateAwayPayment = () => {
     confirmPassword: "",
     acceptTerms: false,
   };
+
+  useEffect(() => {
+    fetchingTheData();
+  }, []);
+
+  async function fetchingTheData(e, unitPrice) {
+    return await fetch(`/orders/createStimate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ orderId }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      });
+  }
+
   const handleFormSubmit = ({ email, password }, { setSubmitting }) => {
     // sendingTheData(email, password, setSubmitting);
   };
 
-  /*   async function sendingTheData(email, password, setSubmitting) {
-    Login(email, password)
-      .then(() => {
+  const payOrder = async (id) => {
+    return await fetch(`/orders/setState`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, orderState: "Paid" }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
         const { from } = history.location.state || {
-          from: { pathname: "/" },
+          from: { pathname: "/cabify" },
         };
         history.push(from);
-      })
-      .catch((error) => {
-        setSubmitting(false);
-        setResponseMessage(error);
+        //setOrdersAccepted(data);
       });
-  } */
+  };
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Email is invalid").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
   return (
     <div className="container">
-      <div className="row mt-5">
+      <div className="row mt-5 container-gateaway">
         <div className="col-md-12 col-lg-6 mt-5">
           <Formik
             initialValues={initialValues}
@@ -134,11 +159,12 @@ const GateAwayPayment = () => {
                       className="invalid-feedback"
                     />
                   </div>
-                  <SearchLocationInput />
+                  {/* <SearchLocationInput /> */}
                 </div>
               </Form>
             )}
           </Formik>
+          <button onClick={() => payOrder(orderId)}>Cash</button>
           {/* <InitAutocomplete /> */}
           <PaypalIntegration />
         </div>

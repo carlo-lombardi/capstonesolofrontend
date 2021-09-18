@@ -3,7 +3,11 @@
 .no-gutters {
   padding: 0;
 }
-
+.container-gateaway {
+  height: 100%;
+  margin-top: 6rem !important;
+  margin-bottom: 14rem !important;
+}
 .heading-3 {
   text-transform: uppercase;
   font-size: 10px;

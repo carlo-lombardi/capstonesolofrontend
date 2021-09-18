@@ -1,9 +1,10 @@
 import { userSubjectValue } from "../servicesFetch/accountServicesFetch";
 import { Logout } from "../servicesFetch/accountServicesFetch";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 export async function post(url, body) {
   const orderId = localStorage.getItem("orderId");
-  console.log("ya pe mrd", orderId);
   const requestOptions = {
     method: "POST",
     headers: {

@@ -1,49 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, Dropdown, DropdownButton } from "react-bootstrap";
-import { OrderPost } from "../../../middleware/OrderManagement";
+import { OrderPost, SetOrderInfo } from "../../../middleware/OrderManagement";
+import orderContext from "../createContext";
 import "./index.css";
 
 export default function PickUp(orderInfo) {
-  const [comment, setCommentValue] = useState("");
+  // const [comment, setCommentValue] = useState("");
   const [wholeProduct, setWholeProduct] = useState([]);
   console.log("wholeProduct pick-up", wholeProduct);
 
   const pickUpTime = [
     {
       name: "Pick Up at",
-      time: "12:15",
+      time: "12:15:00",
     },
     {
       name: "Pick Up at",
-      time: "12:30",
+      time: "12:30:00",
     },
     {
       name: "Pick Up at",
-      time: "12:45",
+      time: "12:45:00",
     },
     {
       name: "Pick Up at",
-      time: "13:00",
+      time: "13:00:00",
     },
   ];
-  useEffect(async () => {
-    const dataResult = await OrderPost({
-      _id: orderInfo.orderInfo.orderId,
-      orderType: "PickUp",
-    });
-    console.log("dataResult", dataResult);
-    setWholeProduct(dataResult);
-    setCommentValue(dataResult.order.comment);
-  }, [orderInfo, setCommentValue]);
+  const myArray = [];
+  const totalOrder = useContext(orderContext);
+  myArray.push(totalOrder);
+  console.log("esto es de use conext", myArray);
 
-  const SetComment = async (e) => {
-    e.preventDefault();
-    setCommentValue(e.currentTarget.value);
-    await OrderPost({
-      _id: orderInfo.orderInfo.orderId,
-      comment: e.currentTarget.value,
-    });
-  };
+  /*   useEffect(async () => {
+    dataResult()
+
+  }, [orderInfo]); */
+
+  // useEffect(async () => {
+  //   const dataResult = await OrderPost({
+  //     _id: orderInfo.orderInfo.orderId,
+  //     orderType: "PickUp",
+  //   });
+
+  //   return function cleanup() {
+  //     setCommentValue(dataResult.order.comment);
+  //   };
+  // }, []);
+
+  // const SetComment = async (e) => {
+  //   e.preventDefault();
+  //   setCommentValue(e.currentTarget.value);
+  //   await OrderPost({
+  //     _id: orderInfo.orderInfo.orderId,
+  //     comment: e.currentTarget.value,
+  //   });
+  // };
 
   return (
     <form>
@@ -66,6 +78,7 @@ export default function PickUp(orderInfo) {
           </DropdownButton>
         </div>
         <div className="row item-selected">
+          {/* <div>{totalOrder.newItemResponse.itemName}</div> */}
           {wholeProduct &&
           wholeProduct.lines &&
           wholeProduct.lines.length > 0 ? (
@@ -99,7 +112,6 @@ export default function PickUp(orderInfo) {
             <strong>Subtotal</strong>
           </div>
           <div>
-            {console.log("sera?", wholeProduct)}
             {wholeProduct &&
             wholeProduct.order &&
             wholeProduct.order.subtotal ? (
@@ -120,9 +132,15 @@ export default function PickUp(orderInfo) {
               <Form.Control
                 as="textarea"
                 rows={4}
-                value={comment}
+                // value={comment}
                 className="query-customer-area"
-                onChange={async (e) => await SetComment(e)}
+                // onChange={async (e) => await SetComment(e)}
+                onBlur={async (e) =>
+                  await SetOrderInfo({
+                    comment: e.currentTarget.value,
+                  })
+                }
+                placeholder="Write for the chef"
               />
             </Form.Group>
           </Form>

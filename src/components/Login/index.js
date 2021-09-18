@@ -9,9 +9,10 @@ import "./index.css";
 export default function LogIn(props) {
   console.log(props.state);
   const history = useHistory();
+  const orderId = localStorage.getItem("orderId");
   const [displayer, setDisplayer] = useState(true);
   const [responseMessage, setResponseMessage] = useState([]);
-  console.log("creo", history);
+  const [user, setUser] = useState();
   const registerModel = {
     email: "",
     password: "",
@@ -49,9 +50,13 @@ export default function LogIn(props) {
           {({ errors, touched, isSubmitting }) => (
             <Form>
               <h3 className="card-header-h3">LOG IN</h3>
-              <h6>
-                or choose <Link to="/gate-away-payment">fast track</Link>
-              </h6>
+              {orderId == null || orderId == "undefined" ? (
+                <br />
+              ) : (
+                <h6>
+                  or choose <Link to="/gate-away-payment">fast track</Link>
+                </h6>
+              )}
               <div className="card-body">
                 <div className="form-group">
                   <label>Email address</label>
