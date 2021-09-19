@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import AboutUs from "../AboutUs/index";
 import {
@@ -15,6 +15,20 @@ export const Port = () => {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+  const [orderLine, setOrderLine] = useState([]);
+  const customerOrderId = localStorage.getItem("customerOrderId");
+
+  useEffect(() => {
+    theStoredOrder(customerOrderId);
+  }, []);
+  async function theStoredOrder(customerOrderId) {
+    await fetch(`orders/${customerOrderId}/orderLine`)
+      .then((response) => response.json())
+      .then((data) => {
+        setOrderLine(data);
+      });
+  }
+
   return (
     <>
       <PortContainer>
@@ -22,9 +36,15 @@ export const Port = () => {
           <PortItems>
             <PortTitle>The Best Tacos Ever That</PortTitle>
             <PortAboutUs>Everyone taco about it</PortAboutUs>
-            <Link to="/menu">
-              <PortButton> Place Order</PortButton>
-            </Link>
+            {customerOrderId ? (
+              <Link to={`/menu/${customerOrderId}`}>
+                <PortButton> Place Order</PortButton>
+              </Link>
+            ) : (
+              <Link to="/menu">
+                <PortButton> Place Order</PortButton>
+              </Link>
+            )}
           </PortItems>
         </PortContent>
       </PortContainer>

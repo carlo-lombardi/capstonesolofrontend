@@ -6,6 +6,7 @@ import "./index.css";
 
 export default function PickUp(orderInfo) {
   // const [comment, setCommentValue] = useState("");
+
   const [wholeProduct, setWholeProduct] = useState([]);
   console.log("wholeProduct pick-up", wholeProduct);
 
@@ -27,11 +28,12 @@ export default function PickUp(orderInfo) {
       time: "13:00:00",
     },
   ];
-  const myArray = [];
-  const totalOrder = useContext(orderContext);
-  myArray.push(totalOrder);
-  console.log("esto es de use conext", myArray);
 
+  const totalOrder = useContext(orderContext);
+
+  useEffect(() => {
+    setWholeProduct(totalOrder.newItemResponse);
+  }, [totalOrder]);
   /*   useEffect(async () => {
     dataResult()
 

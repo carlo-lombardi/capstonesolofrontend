@@ -17,19 +17,19 @@ import PickUp from "../PickUp";
 import Delivery from "../Delivery";
 import { SetOrderInfo } from "../../../middleware/OrderManagement";
 import OrderContext from "../createContext";
+const getOrderIdFromResponse = (orderResponse) => {
+  return orderResponse &&
+    orderResponse.orderResponse &&
+    orderResponse.orderResponse.orderId
+    ? orderResponse.orderResponse.orderId
+    : -1;
+};
 
-const OrdersPreview = (newItemResponse) => {
-  console.log("Esto es el order preview", newItemResponse);
+const OrdersPreview = (orderResponse) => {
+  console.log("Esto es el order preview", orderResponse);
   useEffect(() => {
-    localStorage.setItem(
-      "orderId",
-      newItemResponse &&
-        newItemResponse.newItemResponse &&
-        newItemResponse.newItemResponse.orderId
-        ? newItemResponse.newItemResponse.orderId
-        : newItemResponse.newItemResponse
-    );
-  }, [newItemResponse]);
+    localStorage.setItem("orderId", getOrderIdFromResponse(orderResponse));
+  }, [orderResponse]);
   const [displayer, setDisplayer] = useState(true);
   const [modalShow, setModalShow] = useState(false);
 
@@ -49,7 +49,7 @@ const OrdersPreview = (newItemResponse) => {
   };
 
   return (
-    <OrderContext.Provider value={{ ...newItemResponse }}>
+    <OrderContext.Provider value={{ ...orderResponse }}>
       <PreviewMainContainer className="container-fluid">
         <div className="row way-selected">
           <ButtonContainer className="col-lg-6">
@@ -83,23 +83,19 @@ const OrdersPreview = (newItemResponse) => {
           <div className="col-lg-12">
             {displayer === true ? (
               <PickUp
-                orderInfo={
-                  newItemResponse &&
-                  newItemResponse.newItemResponse &&
-                  newItemResponse.newItemResponse.orderId
-                    ? newItemResponse.newItemResponse
-                    : { newItemResponse: { orderId: -1 } }
-                }
+              // orderInfo={
+              //   getOrderIdFromResponse(orderResponse)
+              //     ? orderResponse.orderResponse
+              //     : { Order: { order: { _id: -1 } } }
+              // }
               />
             ) : (
               <Delivery
-                orderInfo={
-                  newItemResponse &&
-                  newItemResponse.newItemResponse &&
-                  newItemResponse.newItemResponse.orderId
-                    ? newItemResponse.newItemResponse
-                    : { newItemResponse: { orderId: -1 } }
-                }
+              // orderInfo={
+              //   getOrderIdFromResponse(orderResponse)
+              //     ? orderResponse.orderResponse
+              //     : { Order: { order: { _id: -1 } } }
+              // }
               />
             )}
           </div>

@@ -24,7 +24,7 @@ const Products = ({ heading, items }) => {
   const [modalShow, setModalShow] = useState(false);
   let [titleLabel, setTitleLabel] = useState("");
   const [responseOrderLine, setResponseOrderLine] = useState();
-
+  console.log("que es?", responseOrderLine);
   const searchInput = "";
   async function Increasing(e, unitPrice) {
     return await fetch(`/orders/orderLine`, {
@@ -34,14 +34,15 @@ const Products = ({ heading, items }) => {
       },
       body: JSON.stringify({
         itemId: e,
-        orderId: responseOrderLine ? responseOrderLine.orderId : null,
+        orderId: responseOrderLine?.order?._id,
         totalPriceOfOrderLine: unitPrice,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        localStorage.setItem("orderId", data.orderId);
-        console.log("data.orderId", data.orderId);
+        const order = data.order;
+        const lines = data.lines;
+        localStorage.setItem("orderId", order._id);
         return data;
       });
   }
@@ -111,12 +112,12 @@ const Products = ({ heading, items }) => {
                   </div>
                 </div>
                 <div className="row go-down">
-                  <input
+                  {/*                   <input
                     type="text"
                     className="search"
                     value={searchInput}
                     placeholder="What do you feel like eating?"
-                  />
+                  /> */}
                 </div>
                 <ProductPromo>Any Promotion will be added here</ProductPromo>
                 <ProductWrapper>
@@ -129,22 +130,33 @@ const Products = ({ heading, items }) => {
                             <ProductInfo>
                               <ProductTitle>{item.name}</ProductTitle>
                               <ProductDesc>{item.description}</ProductDesc>
-                              <ProductDesc>€ {item.unitPrice}</ProductDesc>
+                              <ProductDesc>€ {item.unitPrice}.00</ProductDesc>
                             </ProductInfo>
                           </div>
                           <div className="col-lg-3 text-center">
                             <ProductButton
                               onClick={async (e) => {
-                                const itemDeleted = (item.payload =
-                                  await Decreasing(responseOrderLine._id));
+                                let itemDeleted = await Decreasing(
+                                  item.payload._id
+                                );
+                                console.log(itemDeleted);
+                                item.payload = await itemDeleted.lines.find(
+                                  (line) => line?.current
+                                );
+
                                 setResponseOrderLine(itemDeleted);
                               }}
                             >
                               {" "}
                               -{" "}
                             </ProductButton>
-                            {item.payload ? (
-                              <Counter> {item.payload.quantity} </Counter>
+                            {!(
+                              item == null ||
+                              typeof item === "undefined" ||
+                              item.payload == null ||
+                              typeof item.payload === "undefined"
+                            ) ? (
+                              <Counter>{item.payload.quantity}</Counter>
                             ) : (
                               <Counter> {0} </Counter>
                             )}
@@ -153,10 +165,13 @@ const Products = ({ heading, items }) => {
                                 const beforeQuantity = item.payload
                                   ? item.payload.quantity
                                   : 0;
-                                let newItem = (item.payload = await Increasing(
+                                let newItem = await Increasing(
                                   item._id,
                                   item.unitPrice
-                                ));
+                                );
+                                item.payload = await newItem.lines.find(
+                                  (line) => line.current
+                                );
                                 setResponseOrderLine(newItem);
                                 setModalShow(hasExtras(item, beforeQuantity));
                               }}
@@ -185,8 +200,14 @@ const Products = ({ heading, items }) => {
                           <div className="col-lg-3 text-center">
                             <ProductButton
                               onClick={async (e) => {
-                                let itemDeleted = (item.payload =
-                                  await Decreasing(item._id));
+                                let itemDeleted = await Decreasing(
+                                  item.payload._id
+                                );
+                                console.log(itemDeleted);
+                                item.payload = await itemDeleted.lines.find(
+                                  (line) => line?.current
+                                );
+
                                 setResponseOrderLine(itemDeleted);
                               }}
                             >
@@ -200,10 +221,18 @@ const Products = ({ heading, items }) => {
                             )}
                             <ProductButton
                               onClick={async (e) => {
-                                let newItem = (item.payload = await Increasing(
-                                  item._id
-                                ));
+                                const beforeQuantity = item.payload
+                                  ? item.payload.quantity
+                                  : 0;
+                                let newItem = await Increasing(
+                                  item._id,
+                                  item.unitPrice
+                                );
+                                item.payload = await newItem.lines.find(
+                                  (line) => line.current
+                                );
                                 setResponseOrderLine(newItem);
+                                setModalShow(hasExtras(item, beforeQuantity));
                               }}
                             >
                               {" "}

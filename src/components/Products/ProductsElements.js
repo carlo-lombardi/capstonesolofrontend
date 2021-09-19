@@ -14,7 +14,7 @@ export const ProductWrapper = styled.div`
 
 export const ProductCard = styled.div`
   color: black;
-  border-radius: 5px;
+  border-radius: 35px;
   border: 1px solid #d8d8d8;
   display: flex;
   margin: 1rem 0rem;
@@ -45,15 +45,15 @@ export const ProductPrice = styled.p`
   font-size: 2rem;
 `;
 export const Counter = styled.span`
-  border: 1px solid gray;
   margin: 9px;
   padding: 2px;
   border-radius: 8px;
 `;
 export const ProductButton = styled.button`
-  margin: 41px 0rem;
-  padding: -1%;
-  border-radius: -5px;
+  background-color: white;
+  margin: 41px 0rem !important;
+  padding: -1% !important;
+  border-radius: -5px !important;
   border: none;
   -webkit-transition: 0.2 ease-out;
   -webkit-transition: 0.2 ease-out;
@@ -73,7 +73,7 @@ export const ProductBackToHome = styled(Link)`
 `;
 export const ProductArrow = styled(IoArrowBackOutline)`
   color: #fff;
-  font-size: 20px;
+  font-size: 15px;
 `;
 export const RestarurantStatus = styled.div`
   margin-left: 6px;
@@ -102,10 +102,11 @@ export const IconDelivery = styled(IoBicycle)`
   padding-left: 5px;
 `;
 export const ProductPromo = styled.div`
+  border-radius: 39px;
   align-self: center;
   background-color: #610404;
   padding: 15px 0;
-  margin: 10px 50px;
+  margin: 30px 50px;
   text-align: center;
   color: #fff;
   font-size: 16px;

@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export const PreviewMainContainer = styled.div`
   margin-top: 20px;
-  border-radius: 5px;
+
+  border-radius: 50px;
+
   z-index: 0;
   background-color: white;
   height: 50%;
@@ -64,6 +66,7 @@ export const PickUpTimeTitle = styled.div`
   border: 1px solid darkgray;
 `;
 export const ButtonCheckOut = styled.button`
+  border-radius: 35px;
   margin-bottom: 15px;
   height: 50px;
   width: 100%;

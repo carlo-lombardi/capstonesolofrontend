@@ -10,6 +10,8 @@ export default function LogIn(props) {
   console.log(props.state);
   const history = useHistory();
   const orderId = localStorage.getItem("orderId");
+  const customerOrderId = localStorage.getItem("customerOrderId");
+
   const [displayer, setDisplayer] = useState(true);
   const [responseMessage, setResponseMessage] = useState([]);
   const [user, setUser] = useState();
@@ -26,7 +28,7 @@ export default function LogIn(props) {
     Login(email, password)
       .then(() => {
         const { from } = history.location.state || {
-          from: { pathname: "/gate-away-payment" },
+          from: { pathname: `/gate-away-payment` },
         };
         history.push(from);
       })

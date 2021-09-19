@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, Dropdown, DropdownButton } from "react-bootstrap";
 import { OrderPost, SetOrderInfo } from "../../../middleware/OrderManagement";
 // import initialize from "../../GoogleMapAddress/index.js";
 import "./index.css";
-
+import orderContext from "../createContext";
 // function pickuptimeConstructor()
 // {
 //   const today = new Date();
@@ -37,6 +37,11 @@ export default function Delivery(orderInfo) {
       time: "13:00:00",
     },
   ];
+  const totalOrder = useContext(orderContext);
+
+  useEffect(() => {
+    setWholeProduct(totalOrder.newItemResponse);
+  }, [totalOrder]);
   /*   useEffect(async () => {
     const payload = {
       _id: orderInfo.orderInfo.orderId,
@@ -70,13 +75,13 @@ export default function Delivery(orderInfo) {
     e.preventDefault();
     initialize(searchEngine);
   }*/
-  function setListText(e, obj) {
+  /*   function setListText(e, obj) {
     // orderInfo.orderInfo.orderTime = e;
     setTimeForDelivery(e);
     console.log("objeto de select", obj);
     obj.changeValue("Pick-up at " + e);
     //obj.title = "Pick-up at " + e;
-  }
+  } */
   return (
     <div className="container">
       <div className="row pick-at">
@@ -84,12 +89,12 @@ export default function Delivery(orderInfo) {
           title="Pick-up at"
           id="dropdown-item-button"
           className="container-button"
-          onSelect={async (e) => {
-            setListText(e, this);
-            await SetOrderInfo({
-              orderTime: e,
-            });
-          }}
+          // onSelect={async (e) => {
+          //   setListText(e, this);
+          //   await SetOrderInfo({
+          //     orderTime: e,
+          //   });
+          // }}
         >
           {pickUpTime.map((e, idx) => {
             return (
@@ -106,8 +111,8 @@ export default function Delivery(orderInfo) {
           })}
         </DropdownButton>
       </div>
-      <div className="row item-selected">
-        {/*         <form onKeyUp={(e) => handleSearchEngine(e)}>
+      {/*       <div className="row item-selected">
+                <form onKeyUp={(e) => handleSearchEngine(e)}>
           <input
             id="searchTextField"
             type="text"
@@ -117,8 +122,8 @@ export default function Delivery(orderInfo) {
             placeholder="Anything you want!"
           />
           <div id="filedGeoCode"></div>
-        </form> */}
-      </div>
+        </form>
+      </div> */}
       <div className="row item-selected">
         {wholeProduct && wholeProduct.lines && wholeProduct.lines.length > 0 ? (
           wholeProduct.lines.map((element, idx) => {
