@@ -11,20 +11,24 @@ import {
 } from "./PortElement";
 
 export const Port = () => {
+  console.log("entra?");
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
   };
   const [orderLine, setOrderLine] = useState([]);
-  const customerOrderId = localStorage.getItem("customerOrderId");
+  //const customerOrderId = localStorage.getItem("customerOrderId");
+  const customerOrderId = "61492346c44c636f2cc7c491";
 
   useEffect(() => {
     theStoredOrder(customerOrderId);
   }, []);
   async function theStoredOrder(customerOrderId) {
+    console.log(customerOrderId);
     await fetch(`orders/${customerOrderId}/orderLine`)
       .then((response) => response.json())
       .then((data) => {
+        console.log("entra o no?", data);
         setOrderLine(data);
       });
   }
@@ -38,11 +42,25 @@ export const Port = () => {
             <PortAboutUs>Everyone taco about it</PortAboutUs>
             {customerOrderId ? (
               <Link to={`/menu/${customerOrderId}`}>
-                <PortButton> Place Order</PortButton>
+                <PortButton
+                  onClick={() => {
+                    localStorage.clear();
+                  }}
+                >
+                  {" "}
+                  Place Order
+                </PortButton>
               </Link>
             ) : (
               <Link to="/menu">
-                <PortButton> Place Order</PortButton>
+                <PortButton
+                  onClick={() => {
+                    localStorage.clear();
+                  }}
+                >
+                  {" "}
+                  Place Order
+                </PortButton>
               </Link>
             )}
           </PortItems>

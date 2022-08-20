@@ -7,7 +7,6 @@ import { verifyEmail } from "../../servicesFetch/accountServicesFetch";
 
 export function VerifyEmail() {
   const history = useHistory();
-  console.log("que me da", history);
   const EmailStatus = {
     Verifying: "Verifying",
     Failed: "Failed",
@@ -17,7 +16,6 @@ export function VerifyEmail() {
 
   useEffect(() => {
     const { token } = queryString.parse(history.location.search);
-    console.log("token?", token);
     // remove token from url to prevent http referer leakage
     history.replace(history.location.pathname);
 

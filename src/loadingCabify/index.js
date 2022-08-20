@@ -8,13 +8,13 @@ import orderRefused from "../assest/orderRefused.png";
 export default function CabifyOrder() {
   const history = useHistory();
   const [order, setOrder] = useState({});
+  console.log("order?", order);
   const [orderSummaryResponse, setOrderSummaryResponse] = useState();
-  console.log("esto es el order summary", orderSummaryResponse);
-  console.log("esto es una consoles log the order", order);
+  console.log("orderSummaryResponse", orderSummaryResponse);
+  const orderId = localStorage.getItem("orderId");
   useEffect(() => {
     let looping = true;
     const interval = setInterval(async () => {
-      const orderId = localStorage.getItem("orderId");
       if (orderId && looping) {
         const response = await fetch(`/orders/${orderId}`);
         const data = await response.json();
@@ -42,21 +42,32 @@ export default function CabifyOrder() {
             break;
         }
       }
-    }, 100);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
-  const orderId = localStorage.getItem("orderId");
+
+  const customerOrderId = JSON.parse(localStorage.getItem("stimateResponse"));
+  console.log("esta data tambien ?", customerOrderId);
   async function cabifyOrderResponse() {
     if (orderId) {
+      console.log(orderId);
       localStorage.setItem("customerOrderId", orderId);
-      localStorage.removeItem("orderId");
+      //localStorage.removeItem("orderId");
     }
-    const customerOrderId = localStorage.getItem("customerOrderId");
-    const response = await fetch(`/orders/${customerOrderId}`);
+    const stimateResponse = JSON.parse(localStorage.getItem("stimateResponse"));
+    const response = await fetch(`/orders/createJourney`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: stimateResponse.deliveryProductId,
+      }),
+    });
+
     const data = await response.json();
     setOrderSummaryResponse(data);
   }
-
   return (
     <div className="container loader-container">
       <div id="loader" className="row ">
@@ -67,44 +78,74 @@ export default function CabifyOrder() {
           <Loader />
         </div>
       </div>
-      <div id="accepted" className="row  d-block">
+      <div id="accepted" className="row  d-none">
         <div className="col-lg-12 logo-cabify">
           <img src={deliveryDriver} />
         </div>
         <div className="col-lg-12 mt-2 summary-order">
-          <h4>Your Order Confirmed!</h4>
+          <h4>Your order has been confirmed!</h4>
           <div className="row mt-3">
             <div className="col-12">
               <h5>Hi Carlo,</h5>
             </div>
-            <div className="col-12">
-              Your order sas been confirmed and will be shipping between 12:45 -
-              12:55
+          </div>
+          <div className="row mt-3 border-bottom border-dark">
+            <div className="col-3">
+              <div>Order Date</div>
+              <strong>
+                <div>
+                  {new Date(
+                    orderSummaryResponse?.data?.createJourney?.startAt
+                  ).toLocaleString()}
+                </div>
+              </strong>
+            </div>
+            <div className="col-3">
+              <div>Order Number</div>
+              <strong>
+                <div>{orderSummaryResponse?.data?.createJourney?.id}</div>
+              </strong>
+            </div>
+            <div className="col-3">
+              <div>Payment</div>
+              <strong>
+                <div> Online </div>
+              </strong>
+            </div>
+            <div className="col-3">
+              <div>Address</div>
+              <strong>
+                <div>82 woodlawn park avenue, Dublin 24</div>
+              </strong>
             </div>
           </div>
-          <div className="row mt-3">
-            <div className="col-3">Order Date</div>
-            <div className="col-3">Order Number</div>
-            <div className="col-3">Payment</div>
-            <div className="col-3">Address</div>
+          <div className="row mt-3 border-bottom border-dark">
+            <div className="col-9">
+              <strong>Subtotal</strong>
+            </div>
+            <div className="col-3">
+              <strong>{}</strong>
+            </div>
           </div>
-          <div className="row mt-3">
-            <div className="col-9">Subtotal</div>
-            <div className="col-3">$ 300.00</div>
+          <div className="row mt-3 border-bottom border-dark">
+            <div className="col-9">
+              <strong>Shipping</strong>
+            </div>
+            <div className="col-3">
+              <strong> 2.50 </strong>
+            </div>
           </div>
-          <div className="row mt-3">
-            <div className="col-9">Shipping</div>
-            <div className="col-3">$ 3.00</div>
+          <div className="row mt-3 border-bottom border-dark">
+            <div className="col-9">
+              <strong>Total</strong>
+            </div>
+            <div className="col-3">
+              <strong>
+                {customerOrderId?.order?.order?.totalPriceOfOrder}
+              </strong>
+            </div>
           </div>
-          <div className="row mt-3">
-            <div className="col-9">Fees</div>
-            <div className="col-3">$ 0.30</div>
-          </div>
-          <div className="row mt-3">
-            <div className="col-9">Total</div>
-            <div className="col-3">$ 303.30</div>
-          </div>
-          <div className="row mt-3">
+          <div className="row mt-3 ">
             <div className="col-12">
               <strong>Thank You!</strong>
               <div>El Milagro</div>
@@ -118,7 +159,7 @@ export default function CabifyOrder() {
           </div>
         </div>
       </div>
-      <div id="refused" className="row d-block">
+      <div id="refused" className="row d-none">
         <div className="col-lg-12 logo-cabify">
           <img src={orderRefused} />
         </div>

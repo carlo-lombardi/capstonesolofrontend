@@ -1,7 +1,7 @@
 {
   "name": "capstonesolofrontend",
   "version": "0.1.0",
-  "proxy": "http://localhost:3080",
+  "proxy": "http://localhost:1111",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.15.0",

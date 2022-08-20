@@ -11,30 +11,34 @@ import orderContext from "../createContext";
 //   startHour =
 // };
 
-export default function Delivery(orderInfo) {
+export default function Delivery() {
   const [comment, setCommentValue] = useState("");
   const [wholeProduct, setWholeProduct] = useState([]);
-  const [searchEngine, setSearchEngine] = useState("");
-  const [timeForDelivery, setTimeForDelivery] = useState("");
-
-  console.log("orderInfo", orderInfo);
-
+  const [timeInfo, setTimeInfo] = useState();
   const pickUpTime = [
     {
-      name: "Pick Up at",
-      time: "12:15:00",
+      time: "15:45:00",
     },
     {
-      name: "Pick Up at",
-      time: "12:30:00",
+      time: "16:45:00",
     },
     {
-      name: "Pick Up at",
-      time: "12:45:00",
+      time: "17:45:00",
     },
     {
-      name: "Pick Up at",
-      time: "13:00:00",
+      time: "18:45:00",
+    },
+    {
+      time: "19:45:00",
+    },
+    {
+      time: "20:45:00",
+    },
+    {
+      time: "21:45:00",
+    },
+    {
+      time: "22:45:00",
     },
   ];
   const totalOrder = useContext(orderContext);
@@ -42,59 +46,57 @@ export default function Delivery(orderInfo) {
   useEffect(() => {
     setWholeProduct(totalOrder.newItemResponse);
   }, [totalOrder]);
-  /*   useEffect(async () => {
-    const payload = {
-      _id: orderInfo.orderInfo.orderId,
+
+  /*   console.log(
+    "woi",
+    wholeProduct,
+    wholeProduct?.order,
+    wholeProduct?.order?._id
+  ); */
+  useEffect(async () => {
+    if (!timeInfo || timeInfo == "Delivery Time") return;
+    /*     const payload = {
+      _id: wholeProduct?.order?._id,
       orderType: "Delivery",
-    };
+      orderTime: timeInfo,
+    }; */
 
-    if (timeForDelivery) payload.orderTime = timeForDelivery;
-
-    const dataResult = await OrderPost(payload);
-    // setWholeProduct(dataResult);
-  }, []); */
-
-  /* useEffect(async () => {
-    const dataResult = await OrderPost({
-      _id: orderInfo.orderInfo.orderId,
-      orderType: "Delivery",
+    // if (timeInfo) payload.orderTime = timeInfo;
+    // console.log("llega aqui???????", payload);
+    await SetOrderInfo({
+      orderTime: timeInfo,
     });
-    return function cleanup() {
-      setCommentValue(dataResult.order.comment);
-    };
-  }, []); */
+  }, [timeInfo]);
 
-  /* const SetComment = async (e) => {
-    e.preventDefault();
-    setCommentValue(e.currentTarget.value);
-    await OrderPost({
-      comment: e.currentTarget.value,
+  useEffect(async () => {
+    const dataResponse = await setComment();
+    setCommentValue(dataResponse?.order?.comment);
+  }, []);
+
+  async function setComment(e) {
+    const dataResponse = await SetOrderInfo({
+      _id: wholeProduct?.order?._id,
+      comment: e?.target?.value,
     });
-  }; */
-  /*   function handleSearchEngine(e) {
+    setCommentValue(e?.target?.value);
+    return await dataResponse;
+  }
+  async function SetTimeInfo(e) {
     e.preventDefault();
-    initialize(searchEngine);
-  }*/
-  /*   function setListText(e, obj) {
-    // orderInfo.orderInfo.orderTime = e;
-    setTimeForDelivery(e);
-    console.log("objeto de select", obj);
-    obj.changeValue("Pick-up at " + e);
-    //obj.title = "Pick-up at " + e;
-  } */
+    setTimeInfo(e.target.innerText);
+  }
   return (
     <div className="container">
       <div className="row pick-at">
         <DropdownButton
-          title="Pick-up at"
           id="dropdown-item-button"
           className="container-button"
-          // onSelect={async (e) => {
-          //   setListText(e, this);
-          //   await SetOrderInfo({
-          //     orderTime: e,
-          //   });
-          // }}
+          // title="Pick-up at"
+          title={timeInfo ? `${timeInfo}` : `At Time:`}
+          onClick={(e) => {
+            SetTimeInfo(e);
+          }}
+          // onSelect={async (e) => await SetTimeInfo(e)}
         >
           {pickUpTime.map((e, idx) => {
             return (
@@ -156,7 +158,6 @@ export default function Delivery(orderInfo) {
           <strong>Subtotal</strong>
         </div>
         <div>
-          {console.log("sera?", wholeProduct)}
           {wholeProduct && wholeProduct.order && wholeProduct.order.subtotal ? (
             <strong>{wholeProduct.order.subtotal}.00</strong>
           ) : (
@@ -175,13 +176,14 @@ export default function Delivery(orderInfo) {
             <Form.Control
               as="textarea"
               rows={4}
-              // value={comment}
+              value={comment}
               className="query-customer-area"
-              onBlur={async (e) =>
+              onBlur={async (e) => {
+                setCommentValue(e.currentTarget.value);
                 await SetOrderInfo({
                   comment: e.currentTarget.value,
-                })
-              }
+                });
+              }}
               // onChange={async (e) => await SetComment(e)}
               placeholder="Write for the chef"
             />

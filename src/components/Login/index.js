@@ -7,7 +7,6 @@ import { Login } from "../../servicesFetch/accountServicesFetch";
 import ForgotPassword from "../ForgotPassword";
 import "./index.css";
 export default function LogIn(props) {
-  console.log(props.state);
   const history = useHistory();
   const orderId = localStorage.getItem("orderId");
   const customerOrderId = localStorage.getItem("customerOrderId");

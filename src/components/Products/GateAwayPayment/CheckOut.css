@@ -3,10 +3,18 @@
 .no-gutters {
   padding: 0;
 }
+.button-help {
+  margin-left: 44%;
+  margin-bottom: 5%;
+}
 .container-gateaway {
+  padding: 0% 22%;
   height: 100%;
   margin-top: 6rem !important;
   margin-bottom: 14rem !important;
+}
+.paypal-integration {
+  align-items: center;
 }
 .heading-3 {
   text-transform: uppercase;

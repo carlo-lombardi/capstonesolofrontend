@@ -1,63 +1,83 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, Dropdown, DropdownButton } from "react-bootstrap";
-import { OrderPost, SetOrderInfo } from "../../../middleware/OrderManagement";
+import { IoVolumeHigh } from "react-icons/io5";
+import { SetOrderInfo } from "../../../middleware/OrderManagement";
 import orderContext from "../createContext";
 import "./index.css";
 
-export default function PickUp(orderInfo) {
-  // const [comment, setCommentValue] = useState("");
-
+export default function PickUp() {
   const [wholeProduct, setWholeProduct] = useState([]);
-  console.log("wholeProduct pick-up", wholeProduct);
-
+  const [comment, setCommentValue] = useState();
+  const [timeInfo, setTimeInfo] = useState();
   const pickUpTime = [
     {
-      name: "Pick Up at",
-      time: "12:15:00",
+      time: "15:15:00",
     },
     {
-      name: "Pick Up at",
-      time: "12:30:00",
+      time: "15:30:00",
     },
     {
-      name: "Pick Up at",
-      time: "12:45:00",
+      time: "15:45:00",
     },
     {
-      name: "Pick Up at",
-      time: "13:00:00",
+      time: "16:00:00",
+    },
+    {
+      time: "16:15:00",
+    },
+    {
+      time: "16:30:00",
+    },
+    {
+      time: "16:45:00",
+    },
+    {
+      time: "17:00:00",
+    },
+    {
+      time: "17:15:00",
+    },
+    {
+      time: "17:30:00",
+    },
+    {
+      time: "17:45:00",
+    },
+    {
+      time: "18:00:00",
     },
   ];
 
   const totalOrder = useContext(orderContext);
-
-  useEffect(() => {
+  useEffect(async () => {
     setWholeProduct(totalOrder.newItemResponse);
   }, [totalOrder]);
-  /*   useEffect(async () => {
-    dataResult()
 
-  }, [orderInfo]); */
+  useEffect(async () => {
+    if (timeInfo && timeInfo != "PickUp Time")
+      SetOrderInfo({
+        orderTime: timeInfo,
+      });
+  }, [timeInfo]);
 
-  // useEffect(async () => {
-  //   const dataResult = await OrderPost({
-  //     _id: orderInfo.orderInfo.orderId,
-  //     orderType: "PickUp",
-  //   });
+  useEffect(async () => {
+    const dataResponse = await setComment();
+    setCommentValue(dataResponse?.order?.comment);
+  }, []);
 
-  //   return function cleanup() {
-  //     setCommentValue(dataResult.order.comment);
-  //   };
-  // }, []);
+  async function setComment(e) {
+    const dataResponse = await SetOrderInfo({
+      _id: wholeProduct?.order?._id,
+      comment: e?.target?.value,
+    });
+    setCommentValue(e?.target?.value);
+    return await dataResponse;
+  }
 
-  // const SetComment = async (e) => {
-  //   e.preventDefault();
-  //   setCommentValue(e.currentTarget.value);
-  //   await OrderPost({
-  //     _id: orderInfo.orderInfo.orderId,
-  //     comment: e.currentTarget.value,
-  //   });
-  // };
+  async function SetTimeInfo(e) {
+    e.preventDefault();
+    setTimeInfo(e.target.innerText);
+  }
 
   return (
     <form>
@@ -66,7 +86,12 @@ export default function PickUp(orderInfo) {
           <DropdownButton
             id="dropdown-item-button"
             className="container-button"
-            title="Pick-up at"
+            // title="Pick-up at"
+            title={timeInfo ? `${timeInfo}` : `At Time:`}
+            onClick={(e) => {
+              SetTimeInfo(e);
+            }}
+            // onSelect={async (e) => await SetTimeInfo(e)}
           >
             {pickUpTime.map((e, idx) => {
               return (
@@ -134,14 +159,16 @@ export default function PickUp(orderInfo) {
               <Form.Control
                 as="textarea"
                 rows={4}
-                // value={comment}
+                value={comment}
                 className="query-customer-area"
                 // onChange={async (e) => await SetComment(e)}
-                onBlur={async (e) =>
-                  await SetOrderInfo({
-                    comment: e.currentTarget.value,
-                  })
-                }
+                // onBlur={(e) => setComment(e)}
+                onBlur={(e) => {
+                  setComment(e);
+                  // await SetOrderInfo({
+                  //   comment: e.currentTarget.value,
+                  // });
+                }}
                 placeholder="Write for the chef"
               />
             </Form.Group>

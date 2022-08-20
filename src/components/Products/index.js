@@ -21,10 +21,10 @@ import OrdersPreview from "./PreviewOrder";
 import MyVerticallyCenteredModal from "../Products/PopUpCard";
 
 const Products = ({ heading, items }) => {
+  console.log("entra2?");
   const [modalShow, setModalShow] = useState(false);
   let [titleLabel, setTitleLabel] = useState("");
   const [responseOrderLine, setResponseOrderLine] = useState();
-  console.log("que es?", responseOrderLine);
   const searchInput = "";
   async function Increasing(e, unitPrice) {
     return await fetch(`/orders/orderLine`, {
@@ -42,6 +42,7 @@ const Products = ({ heading, items }) => {
       .then((data) => {
         const order = data.order;
         const lines = data.lines;
+        console.log("viene?", order._id);
         localStorage.setItem("orderId", order._id);
         return data;
       });
@@ -119,7 +120,12 @@ const Products = ({ heading, items }) => {
                     placeholder="What do you feel like eating?"
                   /> */}
                 </div>
-                <ProductPromo>Any Promotion will be added here</ProductPromo>
+                <ProductPromo>
+                  <h7>
+                    ORDER NOW AND ENJOY FREE SOUCES ON ORDERS OVER €15 OR FREE
+                    DRINKS ON ORDERS OVER €25!
+                  </h7>
+                </ProductPromo>
                 <ProductWrapper>
                   {items.map((item, index) => {
                     if (item.itemType !== titleLabel) {
@@ -139,7 +145,6 @@ const Products = ({ heading, items }) => {
                                 let itemDeleted = await Decreasing(
                                   item.payload._id
                                 );
-                                console.log(itemDeleted);
                                 item.payload = await itemDeleted.lines.find(
                                   (line) => line?.current
                                 );
@@ -203,7 +208,6 @@ const Products = ({ heading, items }) => {
                                 let itemDeleted = await Decreasing(
                                   item.payload._id
                                 );
-                                console.log(itemDeleted);
                                 item.payload = await itemDeleted.lines.find(
                                   (line) => line?.current
                                 );

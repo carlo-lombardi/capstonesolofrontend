@@ -38,7 +38,6 @@ const TickBox = () => {
   useEffect(() => {
     toppingsForPacks();
   }, []);
-  console.log(wholeItems);
   async function toppingsForPacks() {
     try {
       return await fetch(`/items`)

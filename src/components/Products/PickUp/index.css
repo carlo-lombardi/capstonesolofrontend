@@ -1,5 +1,10 @@
 .pick-at {
+  padding: 0px 30px;
   height: 65px !important;
+  max-width: 106%;
+}
+.pick-at .dropdown .dropdown-toggle {
+  padding: 0px 30px;
 }
 .container-button {
   margin-bottom: 10px;
@@ -10,7 +15,7 @@
 }
 .container-button .dropdown-menu {
   margin-bottom: 1px !important;
-  width: 333%;
+  width: 280%;
 }
 .container-button .dropdown-menu:hover {
   border: none !important;
@@ -23,7 +28,7 @@
   border: 1px rgba(169, 169, 169, 0.205) solid;
   color: black !important;
   background-color: white !important;
-  width: 333%;
+  width: 280%;
 }
 .item-single-displayed {
   justify-content: space-between;
@@ -38,7 +43,7 @@
 .item-selected {
   overflow: auto;
   display: block;
-  height: 250% !important;
+  height: 182px !important;
   border-bottom: 4px solid rgba(173, 173, 173, 0.658);
   -webkit-animation: pulse-cart-item 2s ease-in-out 2;
   animation: pulse-cart-item 2s ease-in-out 2;

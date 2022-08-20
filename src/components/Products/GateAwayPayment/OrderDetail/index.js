@@ -1,20 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
+import CompletedOrderContext from "../createContextToParents";
 import { Form } from "react-bootstrap";
-import orderContext from "../../createContext";
 import "./index.css";
+
 export default function OrderDetails() {
-  const customerOrderId = localStorage.getItem("customerOrderId");
-
   const [order, setOrder] = useState([]);
+  const customerOrderId = localStorage.getItem("orderId");
   const [orderLine, setOrderLine] = useState([]);
-  console.log("qu es esto si no order", order);
-  console.log("qu es esto si no orderLine", orderLine);
-  useEffect(() => {
-    fetchOrderLine(customerOrderId);
-    fetchOrder(customerOrderId);
-  }, []);
-
-  // const totalOrder = useContext(orderContext);
+  // const [stimateResponse, setStimateResponse] = useState(
+  //   JSON.parse(localStorage.getItem("stimateResponse"))
+  // );
+  //   setStimateResponse(JSON.parse(localStorage.getItem("stimateResponse")));
+  //   if (stimateResponse != null) setOrder(stimateResponse.order);
 
   // console.log("que es esto", totalOrder);
   async function fetchOrderLine(customerOrderId) {
@@ -25,19 +22,20 @@ export default function OrderDetails() {
       });
   }
 
-  async function fetchOrder(customerOrderId) {
-    await fetch(`orders/${customerOrderId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setOrder(data);
-      });
-  }
+  const totalFullOrder = useContext(CompletedOrderContext);
+  console.log("Existe ?", totalFullOrder);
+  useEffect(() => {
+    fetchOrderLine(customerOrderId);
+  }, []);
+
   return (
     <>
       <div className="container">
         <div className="row pick-at">
-          <div>Pick-up at</div>
-          <div>17:15</div>
+          <div>{totalFullOrder?.order?.orderType}</div>
+          <div>
+            <strong>{totalFullOrder?.order?.orderTime}</strong>
+          </div>
         </div>
         {!orderLine ? (
           <div></div>
@@ -68,7 +66,15 @@ export default function OrderDetails() {
             <strong>Subtotal</strong>
           </div>
           <div>
-            <strong>{order.subtotal}.00</strong>
+            <strong>{totalFullOrder?.order?.subtotal}.00</strong>
+          </div>
+        </div>
+        <div className="row subtotal-line">
+          <div>
+            <strong>Delivery charge</strong>
+          </div>
+          <div>
+            <strong>{totalFullOrder?.order?.deliveryfee}</strong>
           </div>
         </div>
         <div className="row customer-comment">
@@ -78,7 +84,7 @@ export default function OrderDetails() {
               <Form.Control
                 as="textarea"
                 rows={4}
-                value={order.comment}
+                value={totalFullOrder?.order?.comment}
                 className="query-customer-area"
               />
             </Form.Group>
@@ -89,7 +95,7 @@ export default function OrderDetails() {
             <strong>Total</strong>
           </div>
           <div>
-            <strong>{order.totalPriceOfOrder}.00</strong>
+            <strong>{totalFullOrder?.order?.totalPriceOfOrder}</strong>
           </div>
         </div>
       </div>

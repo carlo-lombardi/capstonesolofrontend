@@ -18,17 +18,13 @@ import Delivery from "../Delivery";
 import { SetOrderInfo } from "../../../middleware/OrderManagement";
 import OrderContext from "../createContext";
 const getOrderIdFromResponse = (orderResponse) => {
-  return orderResponse &&
-    orderResponse.orderResponse &&
-    orderResponse.orderResponse.orderId
-    ? orderResponse.orderResponse.orderId
-    : -1;
+  return orderResponse?.newItemResponse?.order?._id;
 };
 
 const OrdersPreview = (orderResponse) => {
-  console.log("Esto es el order preview", orderResponse);
   useEffect(() => {
-    localStorage.setItem("orderId", getOrderIdFromResponse(orderResponse));
+    const response = getOrderIdFromResponse(orderResponse);
+    localStorage.setItem("orderId", response);
   }, [orderResponse]);
   const [displayer, setDisplayer] = useState(true);
   const [modalShow, setModalShow] = useState(false);
@@ -47,7 +43,6 @@ const OrdersPreview = (orderResponse) => {
     const delivery = document.getElementById("deliveryButton");
     delivery.style.backgroundColor = "black";
   };
-
   return (
     <OrderContext.Provider value={{ ...orderResponse }}>
       <PreviewMainContainer className="container-fluid">
@@ -58,7 +53,7 @@ const OrdersPreview = (orderResponse) => {
               onClick={async () => {
                 ShowingThePickUpTimer();
                 await SetOrderInfo({
-                  type: "Pickup",
+                  orderType: "PickUp",
                 });
               }}
             >
@@ -71,7 +66,7 @@ const OrdersPreview = (orderResponse) => {
               onClick={async () => {
                 ShowingTheDeliveryTimer();
                 await SetOrderInfo({
-                  type: "Delivery",
+                  orderType: "Delivery",
                 });
               }}
             >

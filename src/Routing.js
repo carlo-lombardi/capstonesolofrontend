@@ -12,46 +12,37 @@ import { PrivateRoute } from "./components/PrivateRoutes/PrivateRoute";
 import ResetPassword from "./components/ResetPassword";
 import { Role } from "./servicesHelp/roles";
 import CabifyOrder from "./loadingCabify";
-// import { userSubjectValue } from "./servicesFetch/accountServicesFetch";
+import isValidOrderProvide from "./middleware/isValidOrder";
+import { isValidOrder } from "./middleware/isValidOrder";
 
 const Routing = () => {
-  /*   const history = useHistory();
-  console.log(history);
-  const pathname = history.location.pathname;
-  const [user, setUser] = useState({});
-  console.log("es to es una mierda", pathname);
-
-  useEffect(() => {
-    const subscription = userSubjectValue.user.subscribe((x) => {
-      console.log("whats that", x);
-      setUser(x);
-    });
-    return subscription.unsubscribe;
-  }, []); */
+  console.log("entra aqui raiz?");
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <Router>
-      <Route exact path="/" component={Port} />
-      <Navbar toggle={toggle} />
-      <Sidebar isOpen={isOpen} toggle={toggle} />
-      <Switch>
-        {/* <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} /> */}
-        <PrivateRoute
-          path="/admin"
-          roles={[Role.Admin]}
-          component={ResetPassword}
-        />
-        <Route path="/gate-away-payment" component={GateAwayPayment} />
-        <Route path="/menu" component={App} />
-        <Route path="/account/reset-password" component={ResetPassword} />
-        <Route path="/account/verify-email" component={VerifyEmail} />
-        <Route path="/cabify" component={CabifyOrder} />
-      </Switch>
-      <Footer />
-    </Router>
+    <isValidOrderProvide.Provider value={isValidOrder}>
+      <Router>
+        <Route exact path="/" component={Port} />
+        <Navbar toggle={toggle} />
+        <Sidebar isOpen={isOpen} toggle={toggle} />
+        <Switch>
+          {/* <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} /> */}
+          <PrivateRoute
+            path="/admin"
+            roles={[Role.Admin]}
+            component={ResetPassword}
+          />
+          <Route path="/gate-away-payment" component={GateAwayPayment} />
+          <Route path="/menu" component={App} />
+          <Route path="/account/reset-password" component={ResetPassword} />
+          <Route path="/account/verify-email" component={VerifyEmail} />
+          <Route path="/cabify" component={CabifyOrder} />
+        </Switch>
+        <Footer />
+      </Router>
+    </isValidOrderProvide.Provider>
   );
 };
 
