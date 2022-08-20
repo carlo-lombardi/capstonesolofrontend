@@ -16,7 +16,6 @@ import isValidOrderProvide from "./middleware/isValidOrder";
 import { isValidOrder } from "./middleware/isValidOrder";
 
 const Routing = () => {
-  console.log("entra aqui raiz?");
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);

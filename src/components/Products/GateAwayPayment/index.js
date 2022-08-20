@@ -36,7 +36,6 @@ const GateAwayPayment = () => {
         localStorage.setItem("stimateResponse", JSON.stringify(callREsponse));
         setStimateResponse(callREsponse);
         setOrder(data.order);
-        console.log("stimateResponse en estimate", callREsponse);
         // return callREsponse;
       });
     // return () => {
@@ -44,7 +43,6 @@ const GateAwayPayment = () => {
     // }
   }, []);
 
-  console.log("stimateResponse", localStorage.getItem("stimateResponse"));
   const history = useHistory();
   const [displayer, setDisplayer] = useState(true);
   const [responseMessage, setResponseMessage] = useState();
@@ -102,7 +100,6 @@ const GateAwayPayment = () => {
     email: Yup.string().email("Email is invalid").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
-  console.log("slkfnsdjiafnlsand", order);
   return (
     <CompletedOrderContext.Provider value={{ ...order }}>
       {/* <div className="container">

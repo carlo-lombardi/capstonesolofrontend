@@ -8,9 +8,7 @@ import orderRefused from "../assest/orderRefused.png";
 export default function CabifyOrder() {
   const history = useHistory();
   const [order, setOrder] = useState({});
-  console.log("order?", order);
   const [orderSummaryResponse, setOrderSummaryResponse] = useState();
-  console.log("orderSummaryResponse", orderSummaryResponse);
   const orderId = localStorage.getItem("orderId");
   useEffect(() => {
     let looping = true;
@@ -47,10 +45,8 @@ export default function CabifyOrder() {
   }, []);
 
   const customerOrderId = JSON.parse(localStorage.getItem("stimateResponse"));
-  console.log("esta data tambien ?", customerOrderId);
   async function cabifyOrderResponse() {
     if (orderId) {
-      console.log(orderId);
       localStorage.setItem("customerOrderId", orderId);
       //localStorage.removeItem("orderId");
     }

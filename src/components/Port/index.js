@@ -11,7 +11,6 @@ import {
 } from "./PortElement";
 
 export const Port = () => {
-  console.log("entra?");
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -24,11 +23,9 @@ export const Port = () => {
     theStoredOrder(customerOrderId);
   }, []);
   async function theStoredOrder(customerOrderId) {
-    console.log(customerOrderId);
     await fetch(`orders/${customerOrderId}/orderLine`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("entra o no?", data);
         setOrderLine(data);
       });
   }
